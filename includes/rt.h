@@ -15,11 +15,12 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
-# define AA_STRENGH 10
-# define RAY_DEPTH 20
-# define SKY_BACKGROUND 1
+# define AA_STRENGH 50
+# define RAY_DEPTH 10
+# define SKY_BACKGROUND 0
 # define MIN_LIGHT 0
 # define MIN_EMITED 0
+# define NUMBER_OF_THREADS 100
 
 typedef struct s_ray
 {
@@ -39,7 +40,8 @@ typedef struct s_hit_rec
 
 typedef struct	s_thread_arg
 {
-	int				j;
+	int				i;
+	int				thread_num;
 	t_img			*img;
 	t_env			*env;
 	t_ray			*ray;
