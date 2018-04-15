@@ -60,29 +60,33 @@ void			*thread_fnc(void *data)
 	int 			i;
 	int				k;
 	t_vector		col;
-	t_thread_arg *thread_arg;
-	int				j;
+	t_thread_arg	*thread_arg;
 	t_ray			ray;
-	t_vector		test;
+	int				pix_per_thread;
+	int				thread_num;
+	int				x;
+	int				y;
 
 	thread_arg = (t_thread_arg*)data;
 	pthread_mutex_lock(&thread_arg->mutex);
-	j = thread_arg->j;
-	thread_arg->j += 1;
+	thread_num = thread_arg->thread_num;
+	thread_arg->thread_num += 1;
 	ray = *thread_arg->ray;
 	pthread_mutex_unlock(&thread_arg->mutex);
+	pix_per_thread = WIN_HEIGH * WIN_WIDTH / NUMBER_OF_THREADS;
 	i = -1;
-	while (++i < WIN_WIDTH)
+	while (++i < pix_per_thread)
 	{
+		x = (thread_num + i * NUMBER_OF_THREADS) % WIN_WIDTH;
+		y = (thread_num + i * NUMBER_OF_THREADS) / WIN_WIDTH;
 		k = -1;
 		set_value_vector(&col, 0, 0, 0);
 		while (++k < AA_STRENGH)
 		{
-			get_ray(&ray, thread_arg->env->camera, i, j);
-			test = get_color(thread_arg->env, &ray, 0);
-			col = add_vector(col, test);
+			get_ray(&ray, thread_arg->env->camera, x, y);
+			col = add_vector(col, get_color(thread_arg->env, &ray, 0));
 		}
-		put_pixel(thread_arg->img, i, j, &col);
+		put_pixel(thread_arg->img, x, y, &col);
 	}
     pthread_exit(NULL);
 }
@@ -95,7 +99,7 @@ void			draw_img(t_img *img, t_env *env)
 	int				i;
 	int				j;
 
-	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * WIN_HEIGH)))
+	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NUMBER_OF_THREADS)))
 														? exit(-1) : 0;
 	thread_arg.ray = &ray;
 	thread_arg.env = env;
@@ -104,14 +108,14 @@ void			draw_img(t_img *img, t_env *env)
 	ray.ori.x = env->camera->pos.x;
 	ray.ori.y = env->camera->pos.y;
 	ray.ori.z = env->camera->pos.z;
-	thread_arg.j = 0;
+	thread_arg.thread_num = 0;
 	j = -1;
     pthread_mutex_init (&thread_arg.mutex, NULL);
-	while (++j < WIN_HEIGH)
+	while (++j < NUMBER_OF_THREADS)
 		(pthread_create(&thread[j], NULL, thread_fnc, &thread_arg) != 0)
 															? exit(3) : 0;
 	i =-1;
-	while (++i < WIN_HEIGH)
+	while (++i < NUMBER_OF_THREADS)
 		pthread_join(thread[i], NULL);
 	free(thread);
 }
