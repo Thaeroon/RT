@@ -22,7 +22,7 @@ int		xy_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (y - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->radius > 0) ? new_vector(0, 0, -1) : new_vector(0, 0, 1);
+	rec->normal = (object->flip_normal > 0) ? new_vector(0, 0, -1) : new_vector(0, 0, 1);
 	return (1);
 }
 
@@ -48,7 +48,7 @@ int		yz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (z - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->radius > 0) ? new_vector(-1, 0, 0) : new_vector(1, 0, 0);
+	rec->normal = (object->flip_normal > 0) ? new_vector(-1, 0, 0) : new_vector(1, 0, 0);
 	return (1);
 }
 
@@ -74,6 +74,6 @@ int		xz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (z - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->radius > 0) ? new_vector(0, -1, 0) : new_vector(0, 1, 0);
+	rec->normal = (object->flip_normal > 0) ? new_vector(0, -1, 0) : new_vector(0, 1, 0);
 	return (1);
 }

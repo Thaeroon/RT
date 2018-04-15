@@ -22,4 +22,5 @@ void				object_print(t_object *object)
 	printf("reflection: %f\n", object->reflection);
 	printf("refraction: %f\n", object->refraction);
 	printf("xpm_texture_file: %s\n", object->texture.file);
+	printf("flip_normal: %d\n", object->flip_normal);
 }

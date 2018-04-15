@@ -36,6 +36,7 @@ typedef struct 		s_object
 	float			reflection;
 	float			refraction;
 	t_tex			texture;
+	int				flip_normal;
 }					t_object;
 
 t_object			*object_new();

@@ -30,5 +30,6 @@ t_object			*object_new()
 	object->texture.line_s = 0;
 	object->texture.bpp = 0;
 	object->texture.endian = 0;
+	object->flip_normal = 0;
 	return (object);
 }

@@ -9,7 +9,7 @@ int            cube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, floa
 	save_closest = closest;
 	tmp_obj = *object;
 	tmp_ray = *ray;
-	tmp_obj.radius = 0;
+	tmp_obj.flip_normal = 0;
 	tmp_ray.ori.z = tmp_ray.ori.z - tmp_obj.size;
 	if (xy_rectangle_hit(&tmp_obj, &tmp_ray, rec, closest))
 	{
@@ -30,7 +30,7 @@ int            cube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, floa
 		closest = rec->t;
 		rec->p.x = rec->p.x + tmp_obj.size;
 	}
-	tmp_obj.radius = 1;
+	tmp_obj.flip_normal = 1;
 	tmp_ray.ori.x = ray->ori.x;
 	tmp_ray.ori.z = tmp_ray.ori.z + tmp_obj.size;
 	if (xy_rectangle_hit(&tmp_obj, &tmp_ray, rec ,closest))
