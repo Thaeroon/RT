@@ -75,10 +75,16 @@ void			*thread_fnc(void *data)
 	pthread_mutex_unlock(&thread_arg->mutex);
 	pix_per_thread = WIN_HEIGH * WIN_WIDTH / NUMBER_OF_THREADS;
 	i = -1;
+	x = (thread_num * (pix_per_thread )) % WIN_WIDTH;
+	y = (thread_num * (pix_per_thread )) / WIN_WIDTH;
+	x--;
 	while (++i < pix_per_thread)
 	{
-		x = (thread_num + i * NUMBER_OF_THREADS) % WIN_WIDTH;
-		y = (thread_num + i * NUMBER_OF_THREADS) / WIN_WIDTH;
+		if (++x >= WIN_WIDTH)
+		{
+			x = 0;
+			y++;
+		}
 		k = -1;
 		set_value_vector(&col, 0, 0, 0);
 		while (++k < AA_STRENGH)
