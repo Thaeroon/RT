@@ -15,12 +15,13 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
-# define AA_STRENGH 50
-# define RAY_DEPTH 10
+# define AA_STRENGH 1
+# define RAY_DEPTH 1
 # define SKY_BACKGROUND 0
 # define MIN_LIGHT 0
 # define MIN_EMITED 0
 # define NUMBER_OF_THREADS 100
+# define LOADING_STEP 101
 
 typedef struct s_ray
 {
@@ -42,10 +43,12 @@ typedef struct	s_thread_arg
 {
 	int				i;
 	int				thread_num;
+	int				end;
 	t_img			*img;
 	t_env			*env;
 	t_ray			*ray;
-    pthread_mutex_t mutex;
+    pthread_mutex_t	mutex;
+    pthread_cond_t	progress;
 } 				t_thread_arg;
 
 void			draw_img(t_img *img, t_env *env);
