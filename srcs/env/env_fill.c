@@ -89,7 +89,10 @@ static void			parse_fn(void *elem, void *ctx)
 	twl_arr_iter(split, create_dict_entry, dict);
 	twl_arr_del(split, free);
 	if (twl_dict_len(dict) < 1)
+	{
+		free(dict);
 		return;
+	}
 	twl_lst_push_back((t_lst *)ctx, dict);
 }
 
