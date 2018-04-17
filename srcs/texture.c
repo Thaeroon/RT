@@ -24,9 +24,9 @@ static t_vector	get_xpm_texture(const t_hit_rec *rec, t_vector ret)
 	i = (i > tex.width - 1) ? tex.width - 1 : i;
 	j = (j > tex.height - 1) ? tex.height - 1 : j;
 	color = tex.buffer[i + tex.width * j];
-	ret.x = ((color >> 16) & 0x0000FF) / 255.0;
-	ret.y = ((color >> 8) & 0x0000FF)/ 255.0;
-	ret.z = (color & 0x0000FF) / 255.0;
+	ret.x = (((color >> 16) & 0x0000FF) / 255.0) * ret.x;
+	ret.y = (((color >> 8) & 0x0000FF)/ 255.0) * ret.y;
+	ret.z = ((color & 0x0000FF) / 255.0) * ret.z;
 	return (ret);
 }
 
