@@ -17,6 +17,8 @@ typedef struct  s_camera
 	t_vector		hori;
 	t_vector		vert;
 	t_vector		up_left;
+	int				sepia_filter;
+	int				save_as_ppm;
 }					t_camera;
 
 t_camera			*camera_new();

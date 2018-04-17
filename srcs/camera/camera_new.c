@@ -16,5 +16,7 @@ t_camera			*camera_new()
 	camera->up_x = 0.0;
 	camera->up_y = 0.0;
 	camera->up_z = 0.0;
+	camera->sepia_filter = 0;
+	camera->save_as_ppm = 0;
 	return (camera);
 }

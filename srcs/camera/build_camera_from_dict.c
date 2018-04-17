@@ -27,4 +27,8 @@ void				build_camera_from_dict(t_camera *camera, t_dict *dict)
 	camera->up_y = atof(ret_val);
 	ret_val = dict_get_with_default(dict, "up_z", "0");
 	camera->up_z = atof(ret_val);
+	ret_val = dict_get_with_default(dict, "sepia_filter", "0");
+	camera->sepia_filter = atoi(ret_val);
+	ret_val = dict_get_with_default(dict, "save_as_ppm", "0");
+	camera->save_as_ppm = atoi(ret_val);
 }

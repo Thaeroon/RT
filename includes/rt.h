@@ -15,13 +15,13 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
-# define AA_STRENGH 1
-# define RAY_DEPTH 1
+# define AA_STRENGH 50
+# define RAY_DEPTH 50
 # define SKY_BACKGROUND 0
 # define MIN_LIGHT 0
 # define MIN_EMITED 0
 # define NUMBER_OF_THREADS 100
-# define LOADING_STEP 101
+# define LOADING_STEP 27
 
 typedef struct s_ray
 {

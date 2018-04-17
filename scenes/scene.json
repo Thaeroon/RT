@@ -11,6 +11,7 @@
 	up_x  : 0,
 	up_y  : 1,
 	up_z  : 0,
+	save_as_ppm : 1,
 },
 {
 	type      : light,

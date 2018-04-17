@@ -95,6 +95,8 @@ void			*thread_fnc(void *data)
 		col.x = col.x / (float)AA_STRENGH;
 		col.y = col.y / (float)AA_STRENGH;
 		col.z = col.z / (float)AA_STRENGH;
+		apply_gamma(&col);
+		apply_filter(thread_arg->env->camera, &col);
 		put_pixel(thread_arg->img->buffer, x, y, &col);
 		if ((thread_num * pix_per_thread + i) % (WIN_HEIGH * WIN_WIDTH / LOADING_STEP) == 0)
 		{
@@ -167,4 +169,5 @@ void			draw_img(t_img *img, t_env *env)
 	pthread_cond_signal(&thread_arg.progress);
 	pthread_join(thread[NUMBER_OF_THREADS], NULL);
 	free(thread);
+	save_image(env->camera, img->buffer);
 }
