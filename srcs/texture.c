@@ -15,18 +15,22 @@ static t_vector	get_xpm_texture(const t_hit_rec *rec, t_vector ret)
 	int			color;
 	t_tex		tex;
 
-
 	tex = rec->obj_ptr->texture;
-	i = rec->u * tex.width;
-	j = (1 - rec->v) * tex.height;
-	i = (i < 0) ? 0 : i;
-	j = (j < 0) ? 0 : j;
-	i = (i > tex.width - 1) ? tex.width - 1 : i;
-	j = (j > tex.height - 1) ? tex.height - 1 : j;
-	color = tex.buffer[i + tex.width * j];
-	ret.x = (((color >> 16) & 0x0000FF) / 255.0) * ret.x;
-	ret.y = (((color >> 8) & 0x0000FF)/ 255.0) * ret.y;
-	ret.z = ((color & 0x0000FF) / 255.0) * ret.z;
+	i = rec->u * tex.width / tex.stretch_x - tex.offset_x;
+	j = (1 - rec->v) * tex.height / tex.stretch_y - tex.offset_y;
+	if (i < 0 || j < 0 || i > tex.width - 1 || j > tex.height - 1)
+	{
+		ret.x = rec->obj_ptr->red * ret.x;
+		ret.y = rec->obj_ptr->green * ret.y;
+		ret.z = rec->obj_ptr->blue * ret.z;
+	}
+	else
+	{
+		color = tex.buffer[i + tex.width * j];
+		ret.x = (((color >> 16) & 0x0000FF) / 255.0) * ret.x;
+		ret.y = (((color >> 8) & 0x0000FF) / 255.0) * ret.y;
+		ret.z = ((color & 0x0000FF) / 255.0) * ret.z;
+	}
 	return (ret);
 }
 

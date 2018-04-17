@@ -43,6 +43,14 @@ void				build_object_from_dict(t_object *object, t_dict *dict)
 	object->refraction = atof(ret_val);
 	ret_val = dict_get_with_default(dict, "xpm_texture_file", "");
 	object->texture.file = twl_strdup(ret_val);
+	ret_val = dict_get_with_default(dict, "texture_offset_x", "0");
+	object->texture.offset_x = atof(ret_val);
+	ret_val = dict_get_with_default(dict, "texture_offset_y", "0");
+	object->texture.offset_y = atof(ret_val);
+	ret_val = dict_get_with_default(dict, "texture_stretch_x", "1");
+	object->texture.stretch_x = (atof(ret_val) == 0) ? 1 : atof(ret_val);
+	ret_val = dict_get_with_default(dict, "texture_stretch_y", "1");
+	object->texture.stretch_y = (atof(ret_val) == 0) ? 1 : atof(ret_val);
 	ret_val = dict_get_with_default(dict, "flip_normal", "0");
 	object->flip_normal = atof(ret_val);
 }

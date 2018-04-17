@@ -16,6 +16,10 @@ typedef struct 		s_tex
 	int				endian;
 	int				width;
 	int				height;
+	float			offset_x;
+	float			offset_y;
+	float			stretch_x;
+	float			stretch_y;
 }					t_tex;
 
 typedef struct 		s_object

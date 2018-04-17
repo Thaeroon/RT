@@ -29,6 +29,10 @@ t_object			*object_new()
 	object->texture.height = 0;
 	object->texture.line_s = 0;
 	object->texture.bpp = 0;
+	object->texture.offset_x = 0.0;
+	object->texture.offset_y = 0.0;
+	object->texture.stretch_x = 1.0;
+	object->texture.stretch_y = 1.0;
 	object->texture.endian = 0;
 	object->flip_normal = 0;
 	return (object);

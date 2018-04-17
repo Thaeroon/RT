@@ -22,5 +22,9 @@ void				object_print(t_object *object)
 	printf("reflection: %f\n", object->reflection);
 	printf("refraction: %f\n", object->refraction);
 	printf("xpm_texture_file: %s\n", object->texture.file);
+	printf("texture_offset_x: %f\n", object->texture.offset_x);
+	printf("texture_offset_y: %f\n", object->texture.offset_y);
+	printf("texture_stretch_x: %f\n", object->texture.stretch_x);
+	printf("texture_stretch_y: %f\n", object->texture.stretch_y);
 	printf("flip_normal: %d\n", object->flip_normal);
 }
