@@ -152,6 +152,7 @@
 		transparence : 0.0,
 		reflection : 1.0,
 		refraction : 0.0000,
+		xpm_texture_file : checker,
 	}
 	]
 	

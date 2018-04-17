@@ -34,10 +34,33 @@ static t_vector	get_xpm_texture(const t_hit_rec *rec, t_vector ret)
 	return (ret);
 }
 
+static t_vector	get_checker_texture(const t_hit_rec *rec, t_vector ret)
+{
+	float		sines;
+
+	sines = sin(10 * rec->p.x) * sin(10 * rec->p.y) * sin(10 * rec->p.z);
+	if (sines > 0)
+	{
+		ret.x = rec->obj_ptr->red * ret.x;
+		ret.y = rec->obj_ptr->green * ret.y;
+		ret.z = rec->obj_ptr->blue * ret.z;
+	}
+	else
+	{
+		ret.x = rec->obj_ptr->red * ret.x / 2;
+		ret.y = rec->obj_ptr->green * ret.y / 2;
+		ret.z = rec->obj_ptr->blue * ret.z / 2;
+	}
+	return (ret);
+}
+
 t_vector		get_texture(const t_hit_rec *rec, t_vector ret)
 {
 	if (rec->obj_ptr->texture.buffer == 0)
-		return (get_constant_texture(rec, ret));
+		if (twl_strcmp(rec->obj_ptr->texture.file, "checker") == 0)
+			return (get_checker_texture(rec, ret));
+		else
+			return (get_constant_texture(rec, ret));
 	else
 		return (get_xpm_texture(rec, ret));
 }
