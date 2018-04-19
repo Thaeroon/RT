@@ -6,11 +6,21 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:40:15 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/19 19:07:33 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
+
+void			apply_gamma(t_vector *col)
+{
+	col->x = sqrt(col->x);
+	col->y = sqrt(col->y);
+	col->z = sqrt(col->z);
+	col->x = (col->x > 1) ? 1 : col->x;
+	col->y = (col->y > 1) ? 1 : col->y;
+	col->z = (col->z > 1) ? 1 : col->z;
+}
 
 void			*thread_fnc(void *data)
 {

@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:02:43 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 16:56:51 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/19 19:08:51 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,23 @@ static int		key_hook(int k, t_img *img)
 	if (k == 53)
 		clean_quit(img);
 	return (0);
+}
+
+static void		free_texture(const t_env *env, t_img *img)
+{
+	t_lst_elem__	*elem;
+	t_lst_elem__	*next;
+	t_object		*obj;
+
+	elem = env->objects->head;
+	while (elem)
+	{
+		next = elem->next;
+		obj = ((t_object*)elem->data);
+		if (obj->texture.ptr)
+			mlx_destroy_image(img->mlx, obj->texture.ptr);
+		elem = next;
+	}
 }
 
 static void		init_img(t_img *img)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   texture.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:08:02 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:10:21 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "texture.h"
 
 static t_vector	get_constant_texture(const t_hit_rec *rec, t_vector ret)
@@ -71,7 +83,6 @@ void			set_texture(const t_env *env, t_img *img)
 	t_lst_elem__	*next;
 	t_object		*obj;
 
-
 	elem = env->objects->head;
 	while (elem)
 	{
@@ -83,24 +94,6 @@ void			set_texture(const t_env *env, t_img *img)
 			obj->texture.buffer = (int*)mlx_get_data_addr(obj->texture.ptr,
 				&(obj->texture.bpp), &(obj->texture.line_s),
 				&(obj->texture.endian));
-		elem = next;
-	}
-}
-
-void			free_texture(const t_env *env, t_img *img)
-{
-	t_lst_elem__	*elem;
-	t_lst_elem__	*next;
-	t_object		*obj;
-
-
-	elem = env->objects->head;
-	while (elem)
-	{
-		next = elem->next;
-		obj = ((t_object*)elem->data);
-		if (obj->texture.ptr)
-			mlx_destroy_image(img->mlx, obj->texture.ptr);
 		elem = next;
 	}
 }
