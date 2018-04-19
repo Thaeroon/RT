@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 16:56:44 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "rt.h"
 #include "texture.h"
 
@@ -14,7 +26,7 @@ static t_vector	background_color(int is_sky, const t_ray *prim_ray)
 		color.z = (1.0 - t) + t * 1.0;
 	}
 	else
-		color = new_vector(MIN_LIGHT,MIN_LIGHT,MIN_LIGHT);
+		color = new_vector(MIN_LIGHT, MIN_LIGHT, MIN_LIGHT);
 	return (color);
 }
 
@@ -50,30 +62,40 @@ static void		get_ray(t_ray *ray, t_camera *cam, int i, int j)
 
 	u = (float)(i + drand48()) / (float)WIN_WIDTH;
 	v = (float)(j + drand48()) / (float)WIN_HEIGH;
-	ray->dir.x = cam->up_left.x + u * cam->hori.x - v * cam->vert.x - cam->pos.x;
-	ray->dir.y = cam->up_left.y + u * cam->hori.y - v * cam->vert.y - cam->pos.y;
-	ray->dir.z = cam->up_left.z + u * cam->hori.z - v * cam->vert.z - cam->pos.z;
+	ray->dir.x = cam->up_left.x + u * cam->hori.x - v
+										* cam->vert.x - cam->pos.x;
+	ray->dir.y = cam->up_left.y + u * cam->hori.y - v
+										* cam->vert.y - cam->pos.y;
+	ray->dir.z = cam->up_left.z + u * cam->hori.z - v
+										* cam->vert.z - cam->pos.z;
 }
 
-void			*thread_fnc(void *data)
+t_vector		apply_aa(t_thread_arg *thread_arg, t_ray *ray, int x, int y)
 {
-	int 			i;
-	int				k;
-	t_vector		col;
-	t_thread_arg	*thread_arg;
-	t_ray			ray;
-	int				pix_per_thread;
-	int				thread_num;
-	int				x;
-	int				y;
+	int			k;
+	t_vector	col;
 
-	thread_arg = (t_thread_arg*)data;
-	pthread_mutex_lock(&thread_arg->mutex);
-	thread_num = thread_arg->thread_num;
-	thread_arg->thread_num += 1;
-	ray = *thread_arg->ray;
-	pthread_mutex_unlock(&thread_arg->mutex);
-	pix_per_thread = WIN_HEIGH * WIN_WIDTH / NUMBER_OF_THREADS;
+	k = -1;
+	set_value_vector(&col, 0, 0, 0);
+	while (++k < AA_STRENGH)
+	{
+		get_ray(ray, thread_arg->env->camera, x, y);
+		col = add_vector(col, get_color(thread_arg->env, ray, 0));
+	}
+	col.x = col.x / (float)AA_STRENGH;
+	col.y = col.y / (float)AA_STRENGH;
+	col.z = col.z / (float)AA_STRENGH;
+	return (col);
+}
+
+void			for_each_pixel(t_thread_arg *thread_arg, t_ray *ray,
+										int pix_per_thread, int thread_num)
+{
+	int			i;
+	int			x;
+	int			y;
+	t_vector	col;
+
 	i = -1;
 	x = (thread_num * pix_per_thread) % WIN_WIDTH;
 	y = (thread_num * pix_per_thread) / WIN_WIDTH;
@@ -85,25 +107,32 @@ void			*thread_fnc(void *data)
 			x = 0;
 			y++;
 		}
-		k = -1;
-		set_value_vector(&col, 0, 0, 0);
-		while (++k < AA_STRENGH)
-		{
-			get_ray(&ray, thread_arg->env->camera, x, y);
-			col = add_vector(col, get_color(thread_arg->env, &ray, 0));
-		}
-		col.x = col.x / (float)AA_STRENGH;
-		col.y = col.y / (float)AA_STRENGH;
-		col.z = col.z / (float)AA_STRENGH;
+		col = apply_aa(thread_arg, ray, x, y);
 		apply_gamma(&col);
 		apply_filter(thread_arg->env->camera, &col);
 		put_pixel(thread_arg->img->buffer, x, y, &col);
-		if ((thread_num * pix_per_thread + i) % (WIN_HEIGH * WIN_WIDTH / LOADING_STEP) == 0)
-		{
+		if ((thread_num * pix_per_thread + i)
+								% (WIN_HEIGH * WIN_WIDTH / LOADING_STEP) == 0)
 			pthread_cond_signal(&thread_arg->progress);
-		}
 	}
-    pthread_exit(NULL);
+}
+
+void			*thread_fnc(void *data)
+{
+	t_thread_arg	*thread_arg;
+	t_ray			ray;
+	int				pix_per_thread;
+	int				thread_num;
+
+	thread_arg = (t_thread_arg*)data;
+	pthread_mutex_lock(&thread_arg->mutex);
+	thread_num = thread_arg->thread_num;
+	thread_arg->thread_num += 1;
+	ray = *thread_arg->ray;
+	pthread_mutex_unlock(&thread_arg->mutex);
+	pix_per_thread = WIN_HEIGH * WIN_WIDTH / NUMBER_OF_THREADS;
+	for_each_pixel(thread_arg, &ray, pix_per_thread, thread_num);
+	pthread_exit(NULL);
 }
 
 void			*loading(void *data)
@@ -132,37 +161,39 @@ void			*loading(void *data)
 								thread_arg->img->loading_img_ptr, 0, 0);
 		i += WIN_WIDTH / LOADING_STEP;
 	}
-    pthread_exit(NULL);
+	pthread_exit(NULL);
 }
 
-void			draw_img(t_img *img, t_env *env)
+static void		init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
+													t_env *env, t_img *img)
+{
+	thread_arg->ray = ray;
+	thread_arg->env = env;
+	thread_arg->img = img;
+	thread_arg->thread_num = 0;
+	thread_arg->end = 0;
+}
+
+void			draw_img(t_img *img, t_env *env, int i)
 {
 	t_ray			ray;
 	t_thread_arg	thread_arg;
 	pthread_t		*thread;
-	int				i;
-	int				j;
 
 	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NUMBER_OF_THREADS + 1)))
 														? exit(-1) : 0;
-	thread_arg.ray = &ray;
-	thread_arg.env = env;
-	thread_arg.img = img;
+	init_thread_arg(&thread_arg, &ray, env, img);
 	init_camera(env->camera, (float)WIN_WIDTH / (float)WIN_HEIGH);
-	ray.ori.x = env->camera->pos.x;
-	ray.ori.y = env->camera->pos.y;
-	ray.ori.z = env->camera->pos.z;
-	thread_arg.thread_num = 0;
-	thread_arg.end = 0;
-	j = -1;
-	(pthread_create(&thread[NUMBER_OF_THREADS], NULL, loading, &thread_arg) != 0)
-														? exit(3) : 0;
-    pthread_mutex_init (&thread_arg.mutex, NULL);
-    pthread_cond_init (&thread_arg.progress, NULL);
-	while (++j < NUMBER_OF_THREADS)
-		(pthread_create(&thread[j], NULL, thread_fnc, &thread_arg) != 0)
+	ray.ori = new_vector(env->camera->pos.x, env->camera->pos.y,
+										env->camera->pos.z);
+	(pthread_create(&thread[NUMBER_OF_THREADS], NULL, loading,
+										&thread_arg) != 0) ? exit(3) : 0;
+	pthread_mutex_init(&thread_arg.mutex, NULL);
+	pthread_cond_init(&thread_arg.progress, NULL);
+	while (++i < NUMBER_OF_THREADS)
+		(pthread_create(&thread[i], NULL, thread_fnc, &thread_arg) != 0)
 															? exit(3) : 0;
-	i =-1;
+	i = -1;
 	while (++i < NUMBER_OF_THREADS)
 		pthread_join(thread[i], NULL);
 	thread_arg.end = 1;
