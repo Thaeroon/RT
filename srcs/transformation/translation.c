@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   translation.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:17:12 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:17:23 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 
-int			translate(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int			translate(t_object *object, const t_ray *ray,
+												t_hit_rec *rec, float closest)
 {
 	t_ray	moved_r;
 

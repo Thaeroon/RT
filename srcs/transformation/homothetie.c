@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   homothetie.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:16:29 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:16:56 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 
-int		homothetie(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int		homothetie(t_object *object, const t_ray *ray,
+												t_hit_rec *rec, float closest)
 {
 	t_ray	modif_r;
 	float	factor;
