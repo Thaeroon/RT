@@ -2,3 +2,4 @@
 rt
 *.dSYM/
 .tmp/
+.vscode/*
