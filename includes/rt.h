@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rt.h                                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 18:38:55 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef RT_H
 # define RT_H
 # include <math.h>
@@ -16,20 +28,20 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
 # define AA_STRENGH 50
-# define RAY_DEPTH 50
+# define RAY_DEPTH 10
 # define SKY_BACKGROUND 1
 # define MIN_LIGHT 0
 # define MIN_EMITED 0
-# define NUMBER_OF_THREADS 100
+# define NUMBER_OF_THREADS 10
 # define LOADING_STEP 27
 
-typedef struct s_ray
+typedef struct	s_ray
 {
 	t_vector	ori;
 	t_vector	dir;
-}			t_ray;
+}				t_ray;
 
-typedef struct s_hit_rec
+typedef struct	s_hit_rec
 {
 	float		t;
 	float		u;
@@ -47,13 +59,14 @@ typedef struct	s_thread_arg
 	t_img			*img;
 	t_env			*env;
 	t_ray			*ray;
-    pthread_mutex_t	mutex;
-    pthread_cond_t	progress;
-} 				t_thread_arg;
+	pthread_mutex_t	mutex;
+	pthread_cond_t	progress;
+}				t_thread_arg;
 
 void			draw_img(t_img *img, t_env *env, int i);
-
-int		scatter(const t_ray *ray, t_hit_rec *rec, t_ray *scatter);
-int		hit(t_env *env, const t_ray *ray, t_hit_rec *rec);
-void	init_camera(t_camera *cam, float aspect);
+void			for_each_pixel(t_thread_arg *thread_arg, t_ray *ray,
+										int pix_per_thread, int thread_num);
+int				scatter(const t_ray *ray, t_hit_rec *rec, t_ray *scatter);
+int				hit(t_env *env, const t_ray *ray, t_hit_rec *rec);
+void			init_camera(t_camera *cam, float aspect);
 #endif

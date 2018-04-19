@@ -1,12 +1,24 @@
-#ifndef __OBJECT_H__
-# define __OBJECT_H__
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object.h                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 18:56:38 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 18:58:29 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-#include "twl_dict.h"
-#include "twl_lst.h"
-#include <math.h>
-#include "vector.h"
+#ifndef OBJECT_H
+# define OBJECT_H
 
-typedef struct 		s_tex
+# include "twl_dict.h"
+# include "twl_lst.h"
+# include <math.h>
+# include "vector.h"
+
+typedef struct		s_tex
 {
 	void			*ptr;
 	char			*file;
@@ -22,7 +34,7 @@ typedef struct 		s_tex
 	float			stretch_y;
 }					t_tex;
 
-typedef struct 		s_object
+typedef struct		s_object
 {
 	char			*type;
 	float			red;
@@ -48,8 +60,8 @@ void				object_del(t_object *object);
 void				objects_del(t_lst *objects);
 
 void				build_object_from_dict(t_object *object, t_dict *dict);
-void 				add_object_to_list_from_dict(t_lst *objects, t_dict *object);
-
+void				add_object_to_list_from_dict(t_lst *objects,
+															t_dict *object);
 
 void				objects_print(t_lst *objects);
 void				object_print(t_object *object);
