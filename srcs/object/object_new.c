@@ -1,7 +1,36 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   object_new.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 20:22:14 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 20:23:40 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "object.h"
 #include "twl_xstdlib.h"
 
-t_object			*object_new()
+static void			suite(t_object *object)
+{
+	object->texture.ptr = 0;
+	object->texture.file = 0;
+	object->texture.buffer = 0;
+	object->texture.width = 0;
+	object->texture.height = 0;
+	object->texture.line_s = 0;
+	object->texture.bpp = 0;
+	object->texture.offset_x = 0.0;
+	object->texture.offset_y = 0.0;
+	object->texture.stretch_x = 1.0;
+	object->texture.stretch_y = 1.0;
+	object->texture.endian = 0;
+	object->flip_normal = 0;
+}
+
+t_object			*object_new(void)
 {
 	t_object		*object;
 
@@ -22,18 +51,6 @@ t_object			*object_new()
 	object->transparence = 1.0;
 	object->reflection = 0.0;
 	object->refraction = 0.0;
-	object->texture.ptr = 0;
-	object->texture.file = 0;
-	object->texture.buffer = 0;
-	object->texture.width = 0;
-	object->texture.height = 0;
-	object->texture.line_s = 0;
-	object->texture.bpp = 0;
-	object->texture.offset_x = 0.0;
-	object->texture.offset_y = 0.0;
-	object->texture.stretch_x = 1.0;
-	object->texture.stretch_y = 1.0;
-	object->texture.endian = 0;
-	object->flip_normal = 0;
+	suite(object);
 	return (object);
 }
