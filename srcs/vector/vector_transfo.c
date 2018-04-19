@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   vector_transfo.c                                   :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:11:49 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:12:09 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "vector.h"
 #include <math.h>
 
@@ -22,7 +34,7 @@ t_vector	new_vector(float x, float y, float z)
 	return (vect);
 }
 
-void	set_value_vector(t_vector *vect, float x, float y, float z)
+void		set_value_vector(t_vector *vect, float x, float y, float z)
 {
 	vect->x = x;
 	vect->y = y;
