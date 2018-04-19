@@ -1,11 +1,33 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   build_camera_from_dict.c                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 20:08:23 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 20:12:20 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "camera.h"
 #include "utils.h"
 #include <stdlib.h>
 #include "twl_stdio.h"
 
+static void			suite(t_camera *camera, t_dict *dict)
+{
+	char		*ret_val;
+
+	ret_val = dict_get_with_default(dict, "sepia_filter", "0");
+	camera->sepia_filter = atoi(ret_val);
+	ret_val = dict_get_with_default(dict, "save_as_ppm", "0");
+	camera->save_as_ppm = atoi(ret_val);
+}
+
 void				build_camera_from_dict(t_camera *camera, t_dict *dict)
 {
-	char 			*ret_val;
+	char			*ret_val;
 
 	ret_val = dict_get_with_default(dict, "pos.x", "0");
 	camera->pos.x = atof(ret_val);
@@ -27,8 +49,5 @@ void				build_camera_from_dict(t_camera *camera, t_dict *dict)
 	camera->up_y = atof(ret_val);
 	ret_val = dict_get_with_default(dict, "up_z", "0");
 	camera->up_z = atof(ret_val);
-	ret_val = dict_get_with_default(dict, "sepia_filter", "0");
-	camera->sepia_filter = atoi(ret_val);
-	ret_val = dict_get_with_default(dict, "save_as_ppm", "0");
-	camera->save_as_ppm = atoi(ret_val);
+	suite(camera, dict);
 }

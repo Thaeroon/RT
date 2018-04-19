@@ -1,7 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   camera_del.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 20:08:39 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 20:12:35 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "camera.h"
 #include <stdlib.h>
 
-void 				camera_del(t_camera *camera)
+void	camera_del(t_camera *camera)
 {
 	free(camera);
 }
