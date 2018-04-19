@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:44:02 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:51:26 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/19 20:18:53 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ typedef struct	s_env
 t_env			*env_new();
 void			env_fill(t_env *env);
 void			env_del(t_env *env);
-
+void			populate_env(void *elem, void *ctx);
 void			env_print(t_env *env);
 
 #endif

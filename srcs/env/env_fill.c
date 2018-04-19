@@ -1,5 +1,16 @@
-#include "env.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_fill.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 20:15:46 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 20:20:02 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
+#include "env.h"
 
 static void			free_dict_wrapper(void *elem_)
 {
@@ -9,22 +20,9 @@ static void			free_dict_wrapper(void *elem_)
 	twl_dict_del(elem, free);
 }
 
-static int			is_valid_type(char *type)
-{
-	char			**types;
-	void			*find;
-
-	types = twl_strsplit(VALIDE_TYPE, ',');
-	find = twl_arr_find(types, twl_strequ_void, type);
-	twl_arr_del(types, free);
-	if (find)
-		return (1);
-	return (0);
-}
-
 static char			*clean_char(char *str, char *match_chars)
 {
-	char 			*new_str;
+	char			*new_str;
 	char			*ret_str;
 	int				i;
 
@@ -44,29 +42,11 @@ static char			*clean_char(char *str, char *match_chars)
 	return (ret_str);
 }
 
-static void			populate_env(void *elem, void *ctx)
-{
-	char			*type;
-
-	type = twl_dict_get((t_dict *)elem, "type");
-	if (!is_valid_type(type))
-	{
-		twl_dprintf(2, "Invalide type: %s. Object will be skipped\n", type);
-		return ;
-	}
-	if (twl_strcmp(type, "camera") == 0)
-		build_camera_from_dict(((t_env *)ctx)->camera, (t_dict *)elem);
-	else if (twl_strcmp(type, "light") == 0)
-		add_light_to_list_from_dict(((t_env *)ctx)->lights, (t_dict *)elem);
-	else
-		add_object_to_list_from_dict(((t_env *)ctx)->objects, (t_dict *)elem);
-}
-
 static void			create_dict_entry(void *elem, void *ctx)
 {
-	char 			*str;
-	char 			**split;
-	t_dict 			*dict;
+	char			*str;
+	char			**split;
+	t_dict			*dict;
 
 	str = (char *)elem;
 	dict = (t_dict *)ctx;
@@ -78,7 +58,7 @@ static void			create_dict_entry(void *elem, void *ctx)
 
 static void			parse_fn(void *elem, void *ctx)
 {
-	char 			*str;
+	char			*str;
 	char			**split;
 	t_dict			*dict;
 
@@ -91,14 +71,14 @@ static void			parse_fn(void *elem, void *ctx)
 	if (twl_dict_len(dict) < 1)
 	{
 		free(dict);
-		return;
+		return ;
 	}
 	twl_lst_push_back((t_lst *)ctx, dict);
 }
 
 void				env_fill(t_env *env)
 {
-	char 			*json;
+	char			*json;
 	char			**split;
 	t_lst			*lst;
 
