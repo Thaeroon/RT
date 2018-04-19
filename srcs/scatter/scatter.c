@@ -1,7 +1,18 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scatter.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:37:27 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:40:05 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "scatter.h"
 
-
-t_vector	reflect(t_vector	dir, t_vector	*normal)
+t_vector	reflect(t_vector dir, t_vector *normal)
 {
 	t_vector	ret;
 	float		dot;
@@ -13,15 +24,17 @@ t_vector	reflect(t_vector	dir, t_vector	*normal)
 	return (ret);
 }
 
-t_vector	random_in_unit_sphere()
+t_vector	random_in_unit_sphere(void)
 {
 	t_vector	p;
 
-	do
+	set_value_vector(&p, 2.0 * drand48() - 1, 2.0 * drand48() - 1,
+														2.0 * drand48() - 1);
+	while (scal_prod(&p, &p) >= 1.0)
 	{
-		set_value_vector(&p, 2.0*drand48()-1, 2.0*drand48()-1, 2.0*drand48()-1);
+		set_value_vector(&p, 2.0 * drand48() - 1, 2.0 * drand48() - 1,
+														2.0 * drand48() - 1);
 	}
-	while(scal_prod(&p ,&p) >= 1.0);
 	return (p);
 }
 
