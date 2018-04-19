@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   sphere.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:23:28 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:32:16 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 
 static void	get_sphere_u_v(const t_vector *p, float *u, float *v)
@@ -11,7 +23,8 @@ static void	get_sphere_u_v(const t_vector *p, float *u, float *v)
 	*v = (theta + M_PI / 2) / (M_PI);
 }
 
-static int	get_values(t_object *object, const t_ray *ray, t_hit_rec *rec, float tmp)
+static int	get_values(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																	float tmp)
 {
 	rec->t = tmp;
 	point_at(ray, tmp, &rec->p);
@@ -22,63 +35,51 @@ static int	get_values(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	return (1);
 }
 
-int		sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int			sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
-	t_vector	oc;
 	float		a;
 	float		b;
 	float		c;
 	float		tmp;
-	t_ray		r;
 
-	r = *ray;
-	oc.x = r.ori.x;
-	oc.y = r.ori.y;
-	oc.z = r.ori.z;
-	a = scal_prod(&r.dir, &r.dir);
-	b = scal_prod(&oc, &r.dir);
-	c = scal_prod(&oc, &oc) - (object->radius * object->radius);
-	tmp = b*b - a*c;
+	a = scal_prod(&ray->dir, &ray->dir);
+	b = scal_prod(&ray->ori, &ray->dir);
+	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	tmp = b * b - a * c;
 	if (tmp > 0)
 	{
-		tmp = (-b - sqrt(b*b - a*c)) / a;
+		tmp = (-b - sqrt(b * b - a * c)) / a;
 		if (0.001 < tmp && tmp < closest)
-			return (get_values(object, &r, rec, tmp));
-		tmp = (-b + sqrt(b*b - a*c)) / a;
+			return (get_values(object, ray, rec, tmp));
+		tmp = (-b + sqrt(b * b - a * c)) / a;
 		if (0.001 < tmp && tmp < closest)
-			return (get_values(object, &r, rec, tmp));
+			return (get_values(object, ray, rec, tmp));
 	}
 	return (0);
 }
 
-int		sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
-	t_vector	oc;
 	float		a;
 	float		b;
 	float		c;
 	float		temp1;
 	float		temp0;
-	float		discrim;
-	t_ray		r;
 
-	r = *ray;
-	oc.x = r.ori.x;
-	oc.y = r.ori.y;
-	oc.z = r.ori.z;
-	a = scal_prod(&r.dir, &r.dir);
-	b = scal_prod(&oc, &r.dir);
-	c = scal_prod(&oc, &oc) - (object->radius * object->radius);
-	discrim = b*b - a*c;
-	if (discrim < 0)
+	a = scal_prod(&ray->dir, &ray->dir);
+	b = scal_prod(&ray->ori, &ray->dir);
+	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	if (b * b - a * c < 0)
 		return (0);
-	temp0 = (-b + sqrtf(b*b - a*c)) / a;
-	temp1 = (-b - sqrtf(b*b - a*c)) / a;
-	if(temp0 > temp1)
+	temp0 = (-b + sqrtf(b * b - a * c)) / a;
+	temp1 = (-b - sqrtf(b * b - a * c)) / a;
+	if (temp0 > temp1)
 	{
-		float tmp = temp0;
+		a = temp0;
 		temp0 = temp1;
-		temp1 = tmp;
+		temp1 = a;
 	}
-	return (decoupage(object,r,rec,closest,temp0,temp1,'y'));
+	return (decoupage(object, *ray, rec, closest, temp0, temp1, 'y'));
 }

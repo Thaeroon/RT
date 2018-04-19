@@ -1,6 +1,19 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rectangle.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/19 19:35:23 by nmuller           #+#    #+#             */
+/*   Updated: 2018/04/19 19:36:26 by nmuller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 
-int		xy_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int		xy_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
 	float	t;
 	float	x;
@@ -22,11 +35,13 @@ int		xy_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (y - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->flip_normal > 0) ? new_vector(0, 0, -1) : new_vector(0, 0, 1);
+	rec->normal = (object->flip_normal > 0) ? new_vector(0, 0, -1)
+														: new_vector(0, 0, 1);
 	return (1);
 }
 
-int		yz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int		yz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
 	float	t;
 	float	z;
@@ -48,11 +63,13 @@ int		yz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (z - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->flip_normal > 0) ? new_vector(-1, 0, 0) : new_vector(1, 0, 0);
+	rec->normal = (object->flip_normal > 0) ? new_vector(-1, 0, 0)
+														: new_vector(1, 0, 0);
 	return (1);
 }
 
-int		xz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int		xz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
 	float	t;
 	float	x;
@@ -74,6 +91,7 @@ int		xz_rectangle_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float 
 	rec->v = (z - coord[2]) / (coord[3] - coord[2]);
 	rec->t = t;
 	point_at(ray, t, &rec->p);
-	rec->normal = (object->flip_normal > 0) ? new_vector(0, -1, 0) : new_vector(0, 1, 0);
+	rec->normal = (object->flip_normal > 0) ? new_vector(0, -1, 0)
+														: new_vector(0, 1, 0);
 	return (1);
 }
