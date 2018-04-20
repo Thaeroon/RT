@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:51:51 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:52:27 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 17:10:32 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,6 @@ void			destroy_img(t_img *img);
 int				clean_quit(void *parram);
 void			put_pixel(int *buffer, int x, int y, t_vector *col);
 void			apply_filter(const t_camera *env, t_vector *col);
-void			apply_gamma(t_vector *col);
 void			save_image(const t_camera *camera, const int *buffer);
 
 #endif

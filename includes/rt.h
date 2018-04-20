@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 15:47:57 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 17:11:57 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,9 +61,9 @@ typedef struct	s_thread_arg
 	pthread_cond_t	progress;
 }				t_thread_arg;
 
+t_vector		get_color(t_env *env, const t_ray *prim_ray, int depth);
 void			draw_img(t_img *img, t_env *env, int i);
-void			for_each_pixel(t_thread_arg *thread_arg, t_ray *ray,
-										int pix_per_thread, int thread_num);
+void			*thread_fnc(void *data);
 int				scatter(const t_ray *ray, t_hit_rec *rec, t_ray *scatter);
 int				hit(t_env *env, const t_ray *ray, t_hit_rec *rec);
 void			init_camera(t_camera *cam, float aspect);
