@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:11:57 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 17:37:57 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ typedef struct	s_thread_arg
 	t_ray			*ray;
 	pthread_mutex_t	mutex;
 	pthread_cond_t	progress;
+	pthread_t		*thread;
 }				t_thread_arg;
 
 t_vector		get_color(t_env *env, const t_ray *prim_ray, int depth);

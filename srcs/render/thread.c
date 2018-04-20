@@ -6,13 +6,13 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:12:37 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 17:59:45 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void			*loading(void *data)
+static void		*loading(void *data)
 {
 	t_thread_arg	*thread_arg;
 	int				i;
@@ -34,10 +34,13 @@ void			*loading(void *data)
 			while (++y < WIN_HEIGH)
 				put_pixel(thread_arg->img->loading_img_buffer, x + i, y, &col);
 		}
+		printf("load...\n");
 		mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win,
 								thread_arg->img->loading_img_ptr, 0, 0);
 		i += WIN_WIDTH / LOADING_STEP;
 	}
+	printf("rendered...\n");
+	mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win, thread_arg->img->ptr, 0, 0);
 	pthread_exit(NULL);
 }
 
@@ -54,15 +57,31 @@ static void		init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
 	ray->ori.z = env->camera->pos.z;
 }
 
+static void		*wait_fnc(void *data)
+{
+	t_thread_arg	*thread_arg;
+	int				i;
+
+	thread_arg = (t_thread_arg*)data;
+	i = -1;
+	while (++i < NUMBER_OF_THREADS)
+		pthread_join(thread_arg->thread[i], NULL);
+	thread_arg->end = 1;
+	pthread_cond_signal(&thread_arg->progress);
+	save_image(thread_arg->env->camera, thread_arg->img->buffer);
+	pthread_exit(NULL);
+}
+
 void			draw_img(t_img *img, t_env *env, int i)
 {
 	t_ray			ray;
 	t_thread_arg	thread_arg;
 	pthread_t		*thread;
 
-	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NUMBER_OF_THREADS + 1)))
+	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NUMBER_OF_THREADS + 2)))
 														? exit(-1) : 0;
 	init_thread_arg(&thread_arg, &ray, env, img);
+	thread_arg.thread = thread;
 	init_camera(env->camera, (float)WIN_WIDTH / (float)WIN_HEIGH);
 	(pthread_create(&thread[NUMBER_OF_THREADS], NULL, loading,
 										&thread_arg) != 0) ? exit(3) : 0;
@@ -71,12 +90,7 @@ void			draw_img(t_img *img, t_env *env, int i)
 	while (++i < NUMBER_OF_THREADS)
 		(pthread_create(&thread[i], NULL, thread_fnc, &thread_arg) != 0)
 															? exit(3) : 0;
-	i = -1;
-	while (++i < NUMBER_OF_THREADS)
-		pthread_join(thread[i], NULL);
-	thread_arg.end = 1;
-	pthread_cond_signal(&thread_arg.progress);
-	pthread_join(thread[NUMBER_OF_THREADS], NULL);
-	free(thread);
-	save_image(env->camera, img->buffer);
+	(pthread_create(&thread[NUMBER_OF_THREADS + 1], NULL, wait_fnc,
+										&thread_arg) != 0) ? exit(3) : 0;
+	mlx_loop(img->mlx);
 }

@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:02:43 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:08:51 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 17:55:49 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 static int		key_hook(int k, t_img *img)
 {
 	if (k == 53)
+		clean_quit(img);
+	if (k == 65307)
 		clean_quit(img);
 	return (0);
 }
@@ -65,11 +67,9 @@ int				main(int ac, char **av)
 	init_img(img);
 	set_texture(env, img);
 	draw_img(img, env, -1);
-	mlx_put_image_to_window(img->mlx, img->win, img->ptr, 0, 0);
 	free_texture(env, img);
 	env_del(env);
 	xopt_del(xopt_singleton());
-	mlx_loop(img->mlx);
 	destroy_img(img);
 	return (0);
 	(void)ac;
