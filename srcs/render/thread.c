@@ -6,19 +6,19 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:35:15 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:40:34 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 15:43:43 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 #include "texture.h"
 
-static t_vector	background_color(int is_sky, const t_ray *prim_ray)
+static t_vector	background_color(t_camera *camera, const t_ray *prim_ray)
 {
 	t_vector	color;
 	float		t;
 
-	if (is_sky)
+	if (camera->sky_background)
 	{
 		t = 0.5 * (normalise(prim_ray->dir).y + 1.0);
 		color.x = (1.0 - t) + t * 0.5;
@@ -26,7 +26,8 @@ static t_vector	background_color(int is_sky, const t_ray *prim_ray)
 		color.z = (1.0 - t) + t * 1.0;
 	}
 	else
-		color = new_vector(MIN_LIGHT, MIN_LIGHT, MIN_LIGHT);
+		color = new_vector(camera->min_illumination, camera->min_illumination,
+													camera->min_illumination);
 	return (color);
 }
 
@@ -52,7 +53,7 @@ static t_vector	get_color(t_env *env, const t_ray *prim_ray, int depth)
 			return (emited);
 	}
 	else
-		return (background_color(SKY_BACKGROUND, prim_ray));
+		return (background_color(env->camera, prim_ray));
 }
 
 static void		get_ray(t_ray *ray, t_camera *cam, int i, int j)

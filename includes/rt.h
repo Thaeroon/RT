@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:38:55 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 15:47:57 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@
 # define WIN_HEIGH 450
 # define AA_STRENGH 50
 # define RAY_DEPTH 10
-# define SKY_BACKGROUND 1
-# define MIN_LIGHT 0
 # define MIN_EMITED 0
 # define NUMBER_OF_THREADS 10
 # define LOADING_STEP 27

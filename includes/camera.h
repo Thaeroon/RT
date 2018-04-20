@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:43:01 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:43:50 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 15:39:38 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ typedef struct	s_camera
 	t_vector		up_left;
 	int				sepia_filter;
 	int				save_as_ppm;
+	int				sky_background;
+	int				min_illumination;
 }				t_camera;
 
 t_camera		*camera_new();
