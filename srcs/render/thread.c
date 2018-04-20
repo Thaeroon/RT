@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:59:45 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/20 18:39:56 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,10 +76,8 @@ void			draw_img(t_img *img, t_env *env, int i)
 {
 	t_ray			ray;
 	t_thread_arg	thread_arg;
-	pthread_t		*thread;
+	pthread_t		thread[NUMBER_OF_THREADS + 2];
 
-	(!(thread = (pthread_t*)malloc(sizeof(pthread_t) * NUMBER_OF_THREADS + 2)))
-														? exit(-1) : 0;
 	init_thread_arg(&thread_arg, &ray, env, img);
 	thread_arg.thread = thread;
 	init_camera(env->camera, (float)WIN_WIDTH / (float)WIN_HEIGH);
