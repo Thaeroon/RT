@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:02:43 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:55:49 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:33:34 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,18 @@ static int		key_hook(int k, t_img *img)
 		clean_quit(img);
 	if (k == 65307)
 		clean_quit(img);
+	return (0);
+}
+
+int				flip(t_thread_arg *thread_arg)
+{
+	usleep(100000);
+	if (!thread_arg->end)
+		mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win,
+								thread_arg->img->loading_img_ptr, 0, 0);
+	else
+		mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win,
+								thread_arg->img->ptr, 0, 0);
 	return (0);
 }
 

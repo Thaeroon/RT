@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 22:12:12 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 13:30:58 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,9 @@ static void		*loading(void *data)
 				put_pixel(thread_arg->img->loading_img_buffer, x + i, y, &col);
 		}
 		printf("load...\n");
-		mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win,
-								thread_arg->img->loading_img_ptr, 0, 0);
-		mlx_do_sync(thread_arg->img->mlx);
 		i += WIN_WIDTH / LOADING_STEP;
 	}
 	printf("rendered...\n");
-	mlx_put_image_to_window(thread_arg->img->mlx, thread_arg->img->win,
-													thread_arg->img->ptr, 0, 0);
-	mlx_do_sync(thread_arg->img->mlx);
-	printf("sync done...\n");
 	pthread_exit(NULL);
 }
 
@@ -83,6 +76,7 @@ void			draw_img(t_img *img, t_env *env, int i)
 	pthread_t		thread[NUMBER_OF_THREADS + 2];
 
 	init_thread_arg(&thread_arg, &ray, env, img);
+	mlx_loop_hook(img->mlx, flip, &thread_arg);
 	thread_arg.thread = thread;
 	init_camera(env->camera, (float)WIN_WIDTH / (float)WIN_HEIGH);
 	(pthread_create(&thread[NUMBER_OF_THREADS], NULL, loading,
