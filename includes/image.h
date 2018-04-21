@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:51:51 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:10:32 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 14:36:20 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,15 @@ typedef struct	s_img
 	void		*loading_img_ptr;
 }				t_img;
 
-void			destroy_img(t_img *img);
-int				clean_quit(void *parram);
+typedef struct	s_clean_arg
+{
+	t_img		*img;
+	t_env		*env;
+	int			*end;
+	pthread_t	wait_thread;
+}				t_clean_arg;
+
+int				clean_quit(t_clean_arg *clean_arg);
 void			put_pixel(int *buffer, int x, int y, t_vector *col);
 void			apply_filter(const t_camera *env, t_vector *col);
 void			save_image(const t_camera *camera, const int *buffer);

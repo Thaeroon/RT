@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 13:30:46 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 14:04:44 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ typedef struct	s_thread_arg
 	t_env			*env;
 	t_ray			*ray;
 	pthread_mutex_t	mutex;
-	pthread_cond_t	progress;
 	pthread_t		*thread;
 }				t_thread_arg;
 
@@ -69,5 +68,7 @@ int				scatter(const t_ray *ray, t_hit_rec *rec, t_ray *scatter);
 int				hit(t_env *env, const t_ray *ray, t_hit_rec *rec);
 void			init_camera(t_camera *cam, float aspect);
 int				flip(t_thread_arg *thread_arg);
+void			loading(int *loading_img_buffer);
+int				key_hook(int k, t_clean_arg *clean_arg);
 
 #endif

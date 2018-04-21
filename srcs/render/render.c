@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:35:15 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 17:10:50 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 14:42:12 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ static void		for_each_pixel(t_thread_arg *thread_arg, t_ray *ray,
 	x--;
 	while (++i < pix_per_thread)
 	{
+		(thread_arg->end) ? pthread_exit(NULL) : 0;
 		if (++x >= WIN_WIDTH)
 		{
 			x = 0;
@@ -80,7 +81,7 @@ static void		for_each_pixel(t_thread_arg *thread_arg, t_ray *ray,
 		put_pixel(thread_arg->img->buffer, x, y, &col);
 		if ((thread_num * pix_per_thread + i)
 								% (WIN_HEIGH * WIN_WIDTH / LOADING_STEP) == 0)
-			pthread_cond_signal(&thread_arg->progress);
+			loading(thread_arg->img->loading_img_buffer);
 	}
 }
 

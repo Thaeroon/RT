@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:04:26 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:09:38 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/21 14:39:34 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,17 +15,34 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-void		destroy_img(t_img *img)
+static void		free_texture(const t_env *env, t_img *img)
 {
-	mlx_destroy_window(img->mlx, img->win);
-	mlx_destroy_image(img->mlx, img->ptr);
-	mlx_destroy_image(img->mlx, img->loading_img_ptr);
-	free(img);
+	t_lst_elem__	*elem;
+	t_lst_elem__	*next;
+	t_object		*obj;
+
+	elem = env->objects->head;
+	while (elem)
+	{
+		next = elem->next;
+		obj = ((t_object*)elem->data);
+		if (obj->texture.ptr)
+			mlx_destroy_image(img->mlx, obj->texture.ptr);
+		elem = next;
+	}
 }
 
-int			clean_quit(void *parram)
+int			clean_quit(t_clean_arg *clean_arg)
 {
-	destroy_img(parram);
+	*clean_arg->end = 1;
+	pthread_join(clean_arg->wait_thread, NULL);
+	free_texture(clean_arg->env, clean_arg->img);
+	env_del(clean_arg->env);
+	xopt_del(xopt_singleton());
+	mlx_destroy_window(clean_arg->img->mlx, clean_arg->img->win);
+	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->ptr);
+	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->loading_img_ptr);
+	free(clean_arg->img);
 	exit(0);
 	return (0);
 }
