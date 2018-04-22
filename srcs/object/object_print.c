@@ -13,7 +13,6 @@
 #include "object.h"
 #include "twl_stdio.h"
 
-
 void				object_print(t_object *object)
 {
 	twl_printf("===== Print Object =====\n");

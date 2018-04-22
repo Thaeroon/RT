@@ -14,7 +14,7 @@
 	save_as_ppm : 0,
 },
 {
-	type       : sphere,
+	type       : cone,
 	red        : 255,
 	green      : 255,
 	blue       : 0,

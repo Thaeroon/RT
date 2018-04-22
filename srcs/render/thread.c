@@ -12,7 +12,7 @@
 
 #include "rt.h"
 
-void		loading(int	*loading_img_buffer, int reset)
+void				loading(int *loading_img_buffer, int reset)
 {
 	static int		i = 0;
 	t_vector		col;
@@ -38,7 +38,7 @@ void		loading(int	*loading_img_buffer, int reset)
 	}
 }
 
-static void		init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
+static void			init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
 													t_env *env, t_img *img)
 {
 	thread_arg->ray = ray;
@@ -51,7 +51,7 @@ static void		init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
 	ray->ori.z = env->camera->pos.z;
 }
 
-static void		*wait_fnc(void *data)
+static void			*wait_fnc(void *data)
 {
 	t_thread_arg	*thread_arg;
 	int				i;
@@ -66,7 +66,7 @@ static void		*wait_fnc(void *data)
 	pthread_exit(NULL);
 }
 
-void			draw_img(t_img *img, t_env *env, int i)
+void				draw_img(t_img *img, t_env *env, int i)
 {
 	t_ray			ray;
 	t_thread_arg	thread_arg;
