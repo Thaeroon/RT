@@ -14,7 +14,7 @@
 	save_as_ppm : 0,
 },
 {
-	type       : sphere,
+	type       : tube,
 	red        : 255,
 	green      : 255,
 	blue       : 0,
