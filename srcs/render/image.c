@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:04:26 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 13:16:09 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 15:16:23 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int			clean_quit(t_clean_arg *clean_arg)
 	env_del(clean_arg->env);
 	xopt_del(xopt_singleton());
 	free(clean_arg->img);
-	while (1);
 	exit(0);
 	return (0);
 }
