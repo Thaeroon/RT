@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:08:58 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 20:14:36 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 21:58:50 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,9 +28,9 @@ void	init_camera(t_camera *cam, float aspect)
 	w.y = cam->pos.y - cam->dir_y;
 	w.z = cam->pos.z - cam->dir_z;
 	w = normalise(w);
-	u = prod_vector(new_vector(cam->up_x, cam->up_y, cam->up_z), w);
+	u = cross(new_vector(cam->up_x, cam->up_y, cam->up_z), w);
 	u = normalise(u);
-	v = prod_vector(w, u);
+	v = cross(w, u);
 	cam->up_left.x = cam->pos.x - half_width * u.x + half_height * v.x - w.x;
 	cam->up_left.y = cam->pos.y - half_width * u.y + half_height * v.y - w.y;
 	cam->up_left.z = cam->pos.z - half_width * u.z + half_height * v.z - w.z;

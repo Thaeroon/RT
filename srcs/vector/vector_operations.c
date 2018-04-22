@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:11:39 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:11:41 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 22:08:17 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_vector	add_vector(t_vector a, t_vector b)
 	return (a);
 }
 
-t_vector	prod_vector(t_vector a, t_vector b)
+t_vector	cross(t_vector a, t_vector b)
 {
 	t_vector	c;
 
@@ -30,7 +30,7 @@ t_vector	prod_vector(t_vector a, t_vector b)
 	return (c);
 }
 
-t_vector	prod_float(t_vector a, float f)
+t_vector	mult_vect_float(t_vector a, float f)
 {
 	a.x = a.x * f;
 	a.y = a.y * f;
@@ -46,7 +46,7 @@ t_vector	mult_vector(t_vector a, t_vector b)
 	return (a);
 }
 
-float		scal_prod(const t_vector *a, const t_vector *b)
+float		dot(const t_vector *a, const t_vector *b)
 {
 	return (a->x * b->x + a->y * b->y + a->z * b->z);
 }

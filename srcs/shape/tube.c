@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   tube.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:30:15 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:30:16 by pbeller          ###   ########.fr       */
+/*   Updated: 2018/04/22 16:38:44 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,17 @@ void			ft_swap_tmp(float *temp1, float *temp2)
 	temp = *temp1;
 	*temp1 = *temp2;
 	*temp2 = temp;
+}
+
+static void	get_tube_u_v(const t_vector *p, float *u, float *v)
+{
+	float	phi;
+	float	theta;
+
+	phi = atan2(p->z, p->x);
+	theta = asin(p->y);
+	*u = 1 - (phi + M_PI) / (2 * M_PI);
+	*v = (theta + M_PI / 2) / (M_PI);
 }
 
 int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
@@ -36,8 +47,7 @@ int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 									object->radius * object->radius;
 	temp0 = (-b + sqrtf(b * b - a * c)) / (a);
 	temp1 = (-b - sqrtf(b * b - a * c)) / (a);
-	if (temp0 > temp1)
-		ft_swap_tmp(&temp0, &temp1);
+	(temp0 > temp1) ? ft_swap_tmp(&temp0, &temp1) : 0;
 	if (temp0 < closest && temp0 > 0.001)
 	{
 		rec->t = temp0;
@@ -45,6 +55,7 @@ int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		rec->normal.x = (rec->p.x) / object->radius;
 		rec->normal.y = 0;
 		rec->normal.z = (rec->p.z) / object->radius;
+		get_tube_u_v(&rec->p, &rec->u, &rec->v);
 		return (1);
 	}
 	return (0);

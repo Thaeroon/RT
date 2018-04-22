@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:23:28 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:38:40 by afertah          ###   ########.fr       */
+/*   Updated: 2018/04/22 22:07:24 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,9 +43,9 @@ int			sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	float		c;
 	float		tmp;
 
-	a = scal_prod(&ray->dir, &ray->dir);
-	b = scal_prod(&ray->ori, &ray->dir);
-	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	a = dot(&ray->dir, &ray->dir);
+	b = dot(&ray->ori, &ray->dir);
+	c = dot(&ray->ori, &ray->ori) - (object->radius * object->radius);
 	tmp = b * b - a * c;
 	if (tmp > 0)
 	{
@@ -67,9 +67,9 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	float		c;
 	t_var		var;
 
-	a = scal_prod(&ray->dir, &ray->dir);
-	b = scal_prod(&ray->ori, &ray->dir);
-	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	a = dot(&ray->dir, &ray->dir);
+	b = dot(&ray->ori, &ray->dir);
+	c = dot(&ray->ori, &ray->ori) - (object->radius * object->radius);
 	if (b * b - a * c < 0)
 		return (0);
 	var.closest = closest;
