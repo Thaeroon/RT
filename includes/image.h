@@ -39,6 +39,6 @@ typedef struct	s_clean_arg
 int				clean_quit(t_clean_arg *clean_arg);
 void			put_pixel(int *buffer, int x, int y, t_vector *col);
 void			apply_filter(const t_camera *env, t_vector *col);
-void			save_image(const t_camera *camera, const int *buffer);
+void			save_image(t_camera *camera, const int *buffer);
 
 #endif

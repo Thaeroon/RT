@@ -21,6 +21,18 @@ int				key_hook(int k, t_clean_arg *clean_arg)
 		clean_quit(clean_arg);
 	if (k == 65307)
 		clean_quit(clean_arg);
+	if (k == 0 || k == 2)
+		move_lr(k, clean_arg);
+	if (k == 8 || k == 49)
+		move_ud(k, clean_arg);
+	if (k == 1 || k == 13)
+		move_fb(k, clean_arg);
+	if (k == 125 || k == 126)
+		rotate_x(k, clean_arg);
+	if (k == 123 || k == 124)
+		rotate_y(k, clean_arg);
+	if (k == 35)
+		save_image(clean_arg->env->camera, clean_arg->img->buffer);
 	return (0);
 }
 

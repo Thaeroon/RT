@@ -33,6 +33,7 @@ typedef struct	s_camera
 	int				save_as_ppm;
 	int				sky_background;
 	int				min_illumination;
+	int				save;
 }				t_camera;
 
 t_camera		*camera_new();

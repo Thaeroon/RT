@@ -34,6 +34,7 @@ static void		free_texture(const t_env *env, t_img *img)
 
 int			clean_quit(t_clean_arg *clean_arg)
 {
+	camera_print(clean_arg->env->camera);
 	*clean_arg->end = 1;
 	pthread_join(clean_arg->wait_thread, NULL);
 	free_texture(clean_arg->env, clean_arg->img);
@@ -59,15 +60,14 @@ void		put_pixel(int *buffer, int x, int y, t_vector *col)
 	buffer[x + WIN_WIDTH * y] = color;
 }
 
-void		save_image(const t_camera *camera, const int *buffer)
+void		save_image(t_camera *camera, const int *buffer)
 {
 	int		fd;
 	int		i;
-	int		col;
 
 	if (!camera->save_as_ppm)
 		return ;
-	fd = open("output_rt.ppm", O_WRONLY | O_CREAT | O_TRUNC, 0666);
+	fd = get_fd(camera);
 	twl_putstr_fd("P3\n", fd);
 	twl_putnbr_fd(WIN_WIDTH, fd);
 	twl_putchar_fd(' ', fd);
@@ -75,17 +75,8 @@ void		save_image(const t_camera *camera, const int *buffer)
 	twl_putstr_fd("\n255\n", fd);
 	i = -1;
 	while (++i < WIN_WIDTH * WIN_HEIGH)
-	{
-		col = (buffer[i] >> 16) & 0xFF;
-		twl_putnbr_fd(col, fd);
-		twl_putchar_fd(' ', fd);
-		col = (buffer[i] >> 8) & 0xFF;
-		twl_putnbr_fd(col, fd);
-		twl_putchar_fd(' ', fd);
-		col = buffer[i] & 0xFF;
-		twl_putnbr_fd(col, fd);
-		twl_putchar_fd('\n', fd);
-	}
+		fill_ppm(buffer, fd, i);
+	close(fd);
 }
 
 void		apply_filter(const t_camera *camera, t_vector *col)

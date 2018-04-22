@@ -1,8 +1,8 @@
 [
 	{
 		type  : camera,
-		pos.x : 10,
-		pos.y : 10,
+		pos.x : 0,
+		pos.y : 0,
 		pos.z : 10,
 		dir_x : 0,
 		dir_y : 0,

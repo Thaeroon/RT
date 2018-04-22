@@ -32,5 +32,6 @@ t_camera			*camera_new(void)
 	camera->save_as_ppm = 0;
 	camera->sky_background = 1;
 	camera->min_illumination = 0;
+	camera->save = 0;
 	return (camera);
 }

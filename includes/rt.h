@@ -27,8 +27,8 @@
 
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
-# define AA_STRENGH 50
-# define RAY_DEPTH 10
+# define AA_STRENGH 100
+# define RAY_DEPTH 50
 # define MIN_EMITED 0
 # define NUMBER_OF_THREADS 10
 # define LOADING_STEP 27
@@ -70,5 +70,12 @@ void			init_camera(t_camera *cam, float aspect);
 int				flip(t_thread_arg *thread_arg);
 void			loading(int *loading_img_buffer);
 int				key_hook(int k, t_clean_arg *clean_arg);
+void			move_lr(int k, t_clean_arg *clean_arg);
+void			move_ud(int k, t_clean_arg *clean_arg);
+void			move_fb(int k, t_clean_arg *clean_arg);
+void			rotate_x(int k, t_clean_arg *clean_arg);
+void			rotate_y(int k, t_clean_arg *clean_arg);
+void			fill_ppm(const int *buffer, int fd, int i);
+int				get_fd(t_camera *camera);
 
 #endif

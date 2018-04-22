@@ -27,6 +27,8 @@ static void			suite(t_camera *camera, t_dict *dict)
 	camera->sky_background = atof(ret_val);
 	ret_val = dict_get_with_default(dict, "min_illumination", "0");
 	camera->min_illumination = atof(ret_val);
+	ret_val = dict_get_with_default(dict, "save", "0");
+	camera->min_illumination = atoi(ret_val);
 }
 
 void				build_camera_from_dict(t_camera *camera, t_dict *dict)
