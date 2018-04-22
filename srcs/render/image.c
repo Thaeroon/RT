@@ -15,7 +15,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 
-static void		free_texture(const t_env *env, t_img *img)
+static void			free_texture(const t_env *env, t_img *img)
 {
 	t_lst_elem__	*elem;
 	t_lst_elem__	*next;
@@ -32,7 +32,7 @@ static void		free_texture(const t_env *env, t_img *img)
 	}
 }
 
-int			clean_quit(t_clean_arg *clean_arg)
+int					clean_quit(t_clean_arg *clean_arg)
 {
 	*clean_arg->end = 1;
 	pthread_join(clean_arg->wait_thread, NULL);
@@ -47,9 +47,9 @@ int			clean_quit(t_clean_arg *clean_arg)
 	return (0);
 }
 
-void		put_pixel(int *buffer, int x, int y, t_vector *col)
+void				put_pixel(int *buffer, int x, int y, t_vector *col)
 {
-	int		color;
+	int				color;
 
 	if (buffer == NULL || x < 0 || y < 0 || x >= WIN_WIDTH || y >= WIN_HEIGH)
 		return ;
@@ -59,10 +59,10 @@ void		put_pixel(int *buffer, int x, int y, t_vector *col)
 	buffer[x + WIN_WIDTH * y] = color;
 }
 
-void		save_image(t_camera *camera, const int *buffer)
+void				save_image(t_camera *camera, const int *buffer)
 {
-	int		fd;
-	int		i;
+	int				fd;
+	int				i;
 
 	fd = get_fd(camera);
 	twl_putstr_fd("P3\n", fd);
@@ -76,9 +76,9 @@ void		save_image(t_camera *camera, const int *buffer)
 	close(fd);
 }
 
-void		apply_filter(const t_camera *camera, t_vector *col)
+void				apply_filter(const t_camera *camera, t_vector *col)
 {
-	t_vector	col_tmp;
+	t_vector		col_tmp;
 
 	if (camera->sepia_filter)
 	{

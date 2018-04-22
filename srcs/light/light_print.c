@@ -13,8 +13,6 @@
 #include "light.h"
 #include "twl_stdio.h"
 
-
-
 void				light_print(t_light *light)
 {
 	twl_printf("===== Light Print =====\n");
