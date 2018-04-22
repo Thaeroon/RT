@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:14 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 20:23:40 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 13:06:22 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ static void			suite(t_object *object)
 	object->texture.stretch_x = 1.0;
 	object->texture.stretch_y = 1.0;
 	object->texture.endian = 0;
+	object->flip_normal = 0;
+	object->cut_lvl = 0;
+	object->cut_axe = 0;
 	object->flip_normal = 0;
 }
 

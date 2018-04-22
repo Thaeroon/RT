@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:56:38 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 18:58:29 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 13:03:29 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,8 @@ typedef struct		s_object
 	float			refraction;
 	t_tex			texture;
 	int				flip_normal;
+	float			cut_lvl;
+	char			cut_axe;
 }					t_object;
 
 t_object			*object_new();

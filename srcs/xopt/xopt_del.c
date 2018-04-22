@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:13:22 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:13:23 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 14:29:31 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void				xopt_del(t_xopt *xopt)
 {
+	twl_opt_del(xopt->opt__);
 	free(xopt->file_argument);
 	free(xopt);
 }
