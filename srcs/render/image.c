@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:04:26 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 12:13:41 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 13:16:09 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,15 +34,14 @@ static void		free_texture(const t_env *env, t_img *img)
 
 int			clean_quit(t_clean_arg *clean_arg)
 {
-	camera_print(clean_arg->env->camera);
 	*clean_arg->end = 1;
 	pthread_join(clean_arg->wait_thread, NULL);
 	free_texture(clean_arg->env, clean_arg->img);
-	env_del(clean_arg->env);
-	xopt_del(xopt_singleton());
 	mlx_destroy_window(clean_arg->img->mlx, clean_arg->img->win);
 	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->ptr);
 	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->loading_img_ptr);
+	env_del(clean_arg->env);
+	xopt_del(xopt_singleton());
 	free(clean_arg->img);
 	while (1);
 	exit(0);

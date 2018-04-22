@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:16 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 11:40:36 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 13:15:13 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,5 @@ void				object_print(t_object *object)
 	twl_printf("texture_stretch_x: %f\n", object->texture.stretch_x);
 	twl_printf("texture_stretch_y: %f\n", object->texture.stretch_y);
 	twl_printf("flip_normal: %d\n", object->flip_normal);
+	twl_printf("cut_lvl: %f\ncut_axe: %c\n", object->cut_lvl, object->cut_axe);
 }
