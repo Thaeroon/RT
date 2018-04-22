@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:04:26 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 23:29:58 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 23:46:41 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void				save_image(t_camera *camera, const int *buffer)
 	int				fd;
 	int				i;
 
-	twl_printf("sldjfhkasdjhf\n");
 	fd = get_fd(camera);
 	twl_putstr_fd("P3\n", fd);
 	twl_putnbr_fd(WIN_WIDTH, fd);
