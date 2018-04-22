@@ -6,28 +6,36 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:27:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 14:40:18 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 11:33:36 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "rt.h"
 
-void		loading(int	*loading_img_buffer)
+void		loading(int	*loading_img_buffer, int reset)
 {
 	static int		i = 0;
 	t_vector		col;
 	int				x;
 	int				y;
 
-	col = new_vector(1, 1, 1);
-	x = -1;
-	while (++x < WIN_WIDTH / LOADING_STEP)
+	if (reset)
 	{
-		y = WIN_HEIGH - 16;
-		while (++y < WIN_HEIGH)
-			put_pixel(loading_img_buffer, x + i, y, &col);
+		i = 0;
+		twl_bzero(loading_img_buffer, WIN_WIDTH * WIN_HEIGH * 4);
 	}
-	i += WIN_WIDTH / LOADING_STEP;
+	else
+	{
+		col = new_vector(1, 1, 1);
+		x = -1;
+		while (++x < WIN_WIDTH / LOADING_STEP)
+		{
+			y = WIN_HEIGH - 16;
+			while (++y < WIN_HEIGH)
+				put_pixel(loading_img_buffer, x + i, y, &col);
+		}
+		i += WIN_WIDTH / LOADING_STEP;
+	}
 }
 
 static void		init_thread_arg(t_thread_arg *thread_arg, t_ray *ray,
@@ -53,7 +61,8 @@ static void		*wait_fnc(void *data)
 	while (++i < NUMBER_OF_THREADS)
 		pthread_join(thread_arg->thread[i], NULL);
 	thread_arg->end = 1;
-	save_image(thread_arg->env->camera, thread_arg->img->buffer);
+	if (thread_arg->env->camera->save_as_ppm)
+		save_image(thread_arg->env->camera, thread_arg->img->buffer);
 	pthread_exit(NULL);
 }
 

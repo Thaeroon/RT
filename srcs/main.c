@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 16:02:43 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 14:43:06 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 11:44:21 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ int				key_hook(int k, t_clean_arg *clean_arg)
 		clean_quit(clean_arg);
 	if (k == 65307)
 		clean_quit(clean_arg);
+	if (k == 35)
+		save_image(clean_arg->env->camera, clean_arg->img->buffer);
+	loading(clean_arg->img->loading_img_buffer, 1);
 	if (k == 0 || k == 2)
 		move_lr(k, clean_arg);
 	if (k == 8 || k == 49)
@@ -31,8 +34,6 @@ int				key_hook(int k, t_clean_arg *clean_arg)
 		rotate_x(k, clean_arg);
 	if (k == 123 || k == 124)
 		rotate_y(k, clean_arg);
-	if (k == 35)
-		save_image(clean_arg->env->camera, clean_arg->img->buffer);
 	return (0);
 }
 

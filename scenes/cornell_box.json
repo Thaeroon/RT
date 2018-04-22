@@ -11,7 +11,8 @@
 	up_x  : 0,
 	up_y  : 1,
 	up_z  : 0,
-	save_as_ppm : 1,
+	save_as_ppm : 0,
+	sky_background : 0,
 },
 {
 	type      : light,

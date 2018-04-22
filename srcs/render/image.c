@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:04:26 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 14:39:34 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 12:13:41 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int			clean_quit(t_clean_arg *clean_arg)
 	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->ptr);
 	mlx_destroy_image(clean_arg->img->mlx, clean_arg->img->loading_img_ptr);
 	free(clean_arg->img);
+	while (1);
 	exit(0);
 	return (0);
 }
@@ -65,8 +66,6 @@ void		save_image(t_camera *camera, const int *buffer)
 	int		fd;
 	int		i;
 
-	if (!camera->save_as_ppm)
-		return ;
 	fd = get_fd(camera);
 	twl_putstr_fd("P3\n", fd);
 	twl_putnbr_fd(WIN_WIDTH, fd);

@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 14:04:44 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 11:26:43 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ int				scatter(const t_ray *ray, t_hit_rec *rec, t_ray *scatter);
 int				hit(t_env *env, const t_ray *ray, t_hit_rec *rec);
 void			init_camera(t_camera *cam, float aspect);
 int				flip(t_thread_arg *thread_arg);
-void			loading(int *loading_img_buffer);
+void			loading(int *loading_img_buffer, int reset);
 int				key_hook(int k, t_clean_arg *clean_arg);
 void			move_lr(int k, t_clean_arg *clean_arg);
 void			move_ud(int k, t_clean_arg *clean_arg);
