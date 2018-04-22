@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:55:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 14:44:29 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 11:57:54 by afertah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,4 +45,5 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
 int			plan_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest);
+int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
 #endif
