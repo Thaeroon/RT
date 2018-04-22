@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:33:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/20 14:45:49 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 12:13:30 by afertah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,10 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		return (xy_rectangle_hit(object, ray, rec, closest));
 	if (twl_strcmp(object->type, "plan") == 0)
 		return (plan_y(object, ray, rec, closest));
+	if (twl_strcmp(object->type, "cone") == 0)
+		return (cone_hit(object, ray, rec, closest));
+//	if (twl_strcmp(object->type, "cabsule") == 0)
+//		return (cabsule_hit(object, ray, rec, closest));
 	return (0);
 }
 
