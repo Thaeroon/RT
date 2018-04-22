@@ -6,7 +6,8 @@ int		tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
 	float		a;
 	float		b;
 	float		c;
-	float		tmp;
+	float		temp0;
+	float		temp1;
 	t_ray		r;
 
 	r = *ray;
@@ -16,26 +17,22 @@ int		tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
 	a = r.dir.x * r.dir.x + r.dir.z * r.dir.z;
 	b = (oc.x * r.dir.x + oc.z * r.dir.z);
 	c = (oc.x * oc.x + oc.y * oc.y + oc.z * oc.z) - object->radius * object->radius;
-	tmp = b*b - a*c;
-	closest = FLT_MAX;
-	if (tmp > 0)
-	{	
-	rec->normal.x = (rec->p.x) / object->radius;
-	rec->normal.y = -1;
-	rec->normal.z = (rec->p.z) / object->radius;
-
-		tmp = (-b - sqrt(b*b - a*c)) / a;
-		if (MIN_CLOSEST < tmp && tmp < closest)
-		{rec->t = tmp;
-			point_at(&r, tmp, &rec->p);
-			return (1);
-		}
-		tmp = (-b + sqrt(b*b - a*c)) / a;
-		if (MIN_CLOSEST < tmp && tmp < closest)
-		{rec->t = tmp;
-			point_at(&r, tmp, &rec->p);
-			return (1);
-		}
+	temp0 = (-b + sqrtf(b*b - a*c)) / (a);
+	temp1 = (-b - sqrtf(b*b - a*c)) / (a);
+	if(temp0 > temp1)
+	{
+		float tmp = temp0;
+		temp0 = temp1;
+		temp1 = tmp;
+	}
+	if(temp0 < closest && temp0 > 0.001)
+	{
+		rec->t = temp0;
+		point_at(&r, temp0, &rec->p);
+		rec->normal.x = (rec->p.x)/object->radius;
+		rec->normal.y =  0;
+		rec->normal.z = (rec->p.z)/object->radius;
+		return (1);
 	}
 	return (0);
 }
