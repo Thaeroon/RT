@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 11:26:43 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 16:15:39 by afertah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,12 @@ typedef struct	s_ray
 	t_vector	ori;
 	t_vector	dir;
 }				t_ray;
-
+typedef struct	s_var
+{
+	float	closest;
+	float	temp1;
+	float	temp0;
+}				t_var;
 typedef struct	s_hit_rec
 {
 	float		t;

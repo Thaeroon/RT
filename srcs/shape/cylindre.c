@@ -6,9 +6,8 @@ int		cylindre_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float clos
 	float		a;
 	float		b;
 	float		c;
-	float		temp1;
-	float		temp0;
 	float		discrim;
+	t_var		var;
 	t_ray		r;
 
 	r = *ray;
@@ -21,13 +20,14 @@ int		cylindre_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float clos
 	discrim = b*b - a*c;
 	if (discrim < 0)
 		return (0);
-	temp0 = (-b + sqrtf(b*b - a*c)) / a;
-	temp1 = (-b - sqrtf(b*b - a*c)) / a;
-	if(temp0 > temp1)
+	var.closest = closest;
+	var.temp0 = (-b + sqrtf(b*b - a*c)) / a;
+	var.temp1 = (-b - sqrtf(b*b - a*c)) / a;
+	if(var.temp0 > var.temp1)
 	{
-		float tmp = temp0;
-		temp0 = temp1;
-		temp1 = tmp;
+		float tmp = var.temp0;
+		var.temp0 = var.temp1;
+		var.temp1 = tmp;
 	}
-	return (decoupage(object,r,rec,closest,temp0,temp1,'y'));
+	return (decoupage(object,r,rec,var));
 }

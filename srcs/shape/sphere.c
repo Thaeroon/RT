@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:23:28 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:32:16 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 16:38:40 by afertah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,21 +65,21 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	float		a;
 	float		b;
 	float		c;
-	float		temp1;
-	float		temp0;
+	t_var		var;
 
 	a = scal_prod(&ray->dir, &ray->dir);
 	b = scal_prod(&ray->ori, &ray->dir);
 	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
 	if (b * b - a * c < 0)
 		return (0);
-	temp0 = (-b + sqrtf(b * b - a * c)) / a;
-	temp1 = (-b - sqrtf(b * b - a * c)) / a;
-	if (temp0 > temp1)
+	var.closest = closest;
+	var.temp0 = (-b + sqrtf(b*b - a*c)) / a;
+	var.temp1 = (-b - sqrtf(b*b - a*c)) / a;
+	if (var.temp0 > var.temp1)
 	{
-		a = temp0;
-		temp0 = temp1;
-		temp1 = a;
+		a = var.temp0;
+		var.temp0 = var.temp1;
+		var.temp1 = a;
 	}
-	return (decoupage(object, *ray, rec, closest, temp0, temp1, 'y'));
+	return (decoupage(object, *ray, rec, var));
 }
