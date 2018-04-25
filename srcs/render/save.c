@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   save.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 14:40:10 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/22 14:40:11 by pbeller          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:38:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int					get_fd(t_camera *camera)
 	path = twl_strdup("output_rt");
 	index = twl_itoa(camera->save);
 	path = twl_strjoinfree(path, index, 'b');
-	path = twl_strjoin(path, ".ppm");
+	path = twl_strjoinfree(path, ".ppm", 'l');
 	fd = open(path, O_WRONLY | O_CREAT | O_TRUNC, 0666);
 	free(path);
 	return (fd);

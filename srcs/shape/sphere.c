@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:23:28 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 22:07:24 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:46:10 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,10 +50,10 @@ int			sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	if (tmp > 0)
 	{
 		tmp = (-b - sqrt(b * b - a * c)) / a;
-		if (0.001 < tmp && tmp < closest)
+		if (MIN_CLOSEST < tmp && tmp < closest)
 			return (get_values(object, ray, rec, tmp));
 		tmp = (-b + sqrt(b * b - a * c)) / a;
-		if (0.001 < tmp && tmp < closest)
+		if (MIN_CLOSEST < tmp && tmp < closest)
 			return (get_values(object, ray, rec, tmp));
 	}
 	return (0);

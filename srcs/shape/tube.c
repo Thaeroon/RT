@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/22 16:30:15 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:38:44 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:46:10 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	temp0 = (-b + sqrtf(b * b - a * c)) / (a);
 	temp1 = (-b - sqrtf(b * b - a * c)) / (a);
 	(temp0 > temp1) ? ft_swap_tmp(&temp0, &temp1) : 0;
-	if (temp0 < closest && temp0 > 0.001)
+	if (temp0 < closest && temp0 > MIN_CLOSEST)
 	{
 		rec->t = temp0;
 		point_at(ray, temp0, &rec->p);

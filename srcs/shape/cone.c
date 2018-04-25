@@ -24,7 +24,7 @@ int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		temp0 = temp1;
 		temp1 = a;
 	}
-	if (temp0 < 0)
+	if (temp0 < MIN_CLOSEST)
 	{
 		a = temp0;
 		temp0 = temp1;
