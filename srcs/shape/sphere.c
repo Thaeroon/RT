@@ -73,13 +73,13 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	if (b * b - a * c < 0)
 		return (0);
 	var.closest = closest;
-	var.temp0 = (-b + sqrtf(b*b - a*c)) / a;
-	var.temp1 = (-b - sqrtf(b*b - a*c)) / a;
-	if (var.temp0 > var.temp1)
+	var.t0 = (-b + sqrtf(b*b - a*c)) / a;
+	var.t1 = (-b - sqrtf(b*b - a*c)) / a;
+	if (var.t0 > var.t1)
 	{
-		a = var.temp0;
-		var.temp0 = var.temp1;
-		var.temp1 = a;
+		a = var.t0;
+		var.t0 = var.t1;
+		var.t1 = a;
 	}
 	return (decoupage(object, *ray, rec, var));
 }

@@ -41,8 +41,11 @@ typedef struct	s_ray
 typedef struct	s_var
 {
 	float	closest;
-	float	temp1;
-	float	temp0;
+	float	t1;
+	float	t0;
+	float	axe0;
+	float	axe1;
+	float	th;
 }				t_var;
 typedef struct	s_hit_rec
 {

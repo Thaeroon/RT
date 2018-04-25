@@ -45,4 +45,9 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 int			plan_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest);
 int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			cone_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			cube_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
 #endif

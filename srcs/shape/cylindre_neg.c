@@ -1,18 +1,5 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   tube.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 16:30:15 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:38:44 by nmuller          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "shape.h"
-
-static void			ft_swap_tmp(float *temp1, float *temp2)
+void			ft_swap_tmp(float *temp1, float *temp2)
 {
 	float		temp;
 
@@ -32,7 +19,7 @@ static void	get_tube_u_v(const t_vector *p, float *u, float *v)
 	*v = (theta + M_PI / 2) / (M_PI);
 }
 
-int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+int				cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 															float closest)
 {
 	float		a;
@@ -60,3 +47,4 @@ int				tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	}
 	return (0);
 }
+
