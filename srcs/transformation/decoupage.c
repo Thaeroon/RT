@@ -35,6 +35,7 @@ int verif_neg(t_object *object, t_ray r, t_hit_rec *rec, float closest)
 	}
 return(1);
 }
+
 void verif(t_ray r, t_object *object, t_var *var)
 {
 	if (object->cut_axe == 'x')
@@ -53,7 +54,7 @@ void verif(t_ray r, t_object *object, t_var *var)
 		var->axe1 = r.ori.z + var->t1 * r.dir.z;
 	}
 	if(object->cut_axe != 'x' && object->cut_axe != 'y' && 
-	object->cut_axe != 'z' && object->cut_axe != 's')
+	object->cut_axe != 'z')
 	{
 		var->axe0 = 0;
 		var->axe1 = 0;

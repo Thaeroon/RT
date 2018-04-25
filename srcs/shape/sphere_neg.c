@@ -32,7 +32,7 @@ int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 
 	a = dot(&ray->dir, &ray->dir);
 	b = dot(&ray->ori, &ray->dir);
-	c = dot(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	c = dot(&ray->ori, &ray->ori) - (object->size * object->size);
 	tmp = b * b - a * c;
 	if (tmp > 0)
 	{

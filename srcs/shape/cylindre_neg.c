@@ -31,7 +31,8 @@ int				cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	b = (ray->ori.x * ray->dir.x + ray->ori.z * ray->dir.z);
 	c = (ray->ori.x * ray->ori.x + ray->ori.z * ray->ori.z) -
-									object->radius * object->radius;
+									object->size * object->size;
+									
 	temp0 = (-b + sqrtf(b * b - a * c)) / (a);
 	temp1 = (-b - sqrtf(b * b - a * c)) / (a);
 	(temp0 > temp1) ? ft_swap_tmp(&temp0, &temp1) : 0;
