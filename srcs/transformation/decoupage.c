@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:18:51 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:41:58 by afertah          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:46:10 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@ int decoupage(t_object *object, t_ray r, t_hit_rec *rec,t_var var)
 		{
 			if(var.temp1 <= 0)
 				return (0);
-			if(var.temp0 < var.closest && var.temp1 > 0.001)
+			if(var.temp0 < var.closest && var.temp1 > MIN_CLOSEST)
 			{
 				rec->t = var.temp0;
 				point_at(&r, var.temp0, &rec->p);
@@ -83,7 +83,7 @@ int decoupage(t_object *object, t_ray r, t_hit_rec *rec,t_var var)
 				float th = var.temp0 + (var.temp1 - var.temp0) * (axe0 + 1) / (axe0-axe1);
 				if(th <= 0)
 					return (0);
-				if(th < var.closest && th > 0.001)
+				if(th < var.closest && th > MIN_CLOSEST)
 				{
 					rec->t = th;
 					point_at(&r, th, &rec->p);
@@ -98,7 +98,7 @@ int decoupage(t_object *object, t_ray r, t_hit_rec *rec,t_var var)
 		{
 			if(var.temp0 <= 0)
 				return (0);
-			if(var.temp0 < var.closest && var.temp0 > 0.001)
+			if(var.temp0 < var.closest && var.temp0 > MIN_CLOSEST)
 			{
 				rec->t = var.temp0;
 				point_at(&r, var.temp0, &rec->p);
@@ -117,7 +117,7 @@ int decoupage(t_object *object, t_ray r, t_hit_rec *rec,t_var var)
 				float th = var.temp0 + (var.temp1-var.temp0) * (axe0 - 1) / (axe0-axe1);
 				if(th <= 0)
 					return(0);
-				if(th < var.closest && th > 0.001)
+				if(th < var.closest && th > MIN_CLOSEST)
 				{
 					rec->t = th;
 					point_at(&r, th, &rec->p);
