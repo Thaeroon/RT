@@ -27,6 +27,8 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 {
 	if (twl_strcmp(object->type, "sphere") == 0)
 		return (sphere_hit(object, ray, rec, closest));
+	if (twl_strcmp(object->type, "sphere_coup") == 0)
+		return (sphere_coup_hit(object, ray, rec, closest));
 	if (twl_strcmp(object->type, "cylindre") == 0)
 		return (cylindre_hit(object, ray, rec, closest));
 	if (twl_strcmp(object->type, "tube") == 0)
@@ -46,8 +48,8 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	if(twl_strcmp(object->type, "cone_coup") == 0)
 		return (cone_coup_hit(object, ray, rec, closest));
 	return(0);
-//	if (twl_strcmp(object->type, "cabsule") == 0)
-//		return (cabsule_hit(object, ray, rec, closest));
+	if (twl_strcmp(object->type, "capsule") == 0)
+		return (capsule_hit(object, ray, rec, closest));
 }
 
 int			hit(t_env *env, const t_ray *ray, t_hit_rec *rec)
