@@ -6,14 +6,14 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:51:51 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/21 14:36:20 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:39:20 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef IMAGE_H
 # define IMAGE_H
 # include "vector.h"
-# include "../minilibx/includes/mlx.h"
+# include "../minilibx_macos/mlx.h"
 
 typedef struct	s_img
 {
