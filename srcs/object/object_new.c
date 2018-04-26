@@ -31,6 +31,10 @@ static void			suite(t_object *object)
 	object->cut_lvl = 0;
 	object->cut_axe = 0;
 	object->flip_normal = 0;
+	object->pos_x_coup = 0;
+	object->pos_y_coup = 0;
+	object->pos_z_coup = 0;
+	object->size_coup = 0;
 }
 
 t_object			*object_new(void)

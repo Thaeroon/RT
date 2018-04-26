@@ -55,6 +55,14 @@ static void			suite2(t_object *object, t_dict *dict)
 	object->cut_lvl = atof(ret_val);
 	ret_val = dict_get_with_default(dict, "cut_axe", "0");
 	object->cut_axe = *ret_val;
+	ret_val = dict_get_with_default(dict, "pos_x_coup", "0");
+	object->cut_axe = *ret_val;
+	ret_val = dict_get_with_default(dict, "pos_y_coup", "0");
+	object->cut_axe = *ret_val;
+	ret_val = dict_get_with_default(dict, "pos_z_coup", "0");
+	object->cut_axe = *ret_val;
+	ret_val = dict_get_with_default(dict, "size_coup", "0");
+	object->cut_axe = *ret_val;
 }
 
 void				build_object_from_dict(t_object *object, t_dict *dict)
