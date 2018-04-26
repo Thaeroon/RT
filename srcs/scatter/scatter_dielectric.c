@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:37:20 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 20:06:41 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/22 22:04:23 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static int		refract(const t_vector *v, t_vector *n, float niovnt,
 	float			discr;
 
 	uv = normalise(*v);
-	dt = scal_prod(&uv, n);
+	dt = dot(&uv, n);
 	discr = 1.0 - niovnt * niovnt * (1.0 - (dt * dt));
 	if (discr > 0)
 	{
@@ -93,15 +93,15 @@ int				scatter_dielectric(const t_ray *ray, t_hit_rec *rec,
 	float		cosine;
 
 	reflect_prob = 1.0;
-	if (scal_prod(&ray->dir, &rec->normal) > 0)
+	if (dot(&ray->dir, &rec->normal) > 0)
 	{
 		niovnt = set_out(&outward, rec->normal, rec->obj_ptr->refraction, 1);
-		cosine = niovnt * scal_prod(&ray->dir, &rec->normal) / norm(&ray->dir);
+		cosine = niovnt * dot(&ray->dir, &rec->normal) / norm(&ray->dir);
 	}
 	else
 	{
 		niovnt = set_out(&outward, rec->normal, rec->obj_ptr->refraction, 0);
-		cosine = -scal_prod(&ray->dir, &rec->normal) / norm(&ray->dir);
+		cosine = -dot(&ray->dir, &rec->normal) / norm(&ray->dir);
 	}
 	if (refract(&ray->dir, &outward, niovnt, &refracted))
 		reflect_prob = schlick(cosine, rec->obj_ptr->refraction);

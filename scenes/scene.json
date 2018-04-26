@@ -1,0 +1,41 @@
+[
+{
+	type  : camera,
+	pos.x : 0,
+	pos.y : 1,
+	pos.z : 10,
+	dir_x : 0,
+	dir_y : 0,
+	dir_z : 0,
+	fov   : 30,
+	up_x  : 0,
+	up_y  : 1,
+	up_z  : 0,
+	save_as_ppm : 0,
+},
+{
+	type       : capsule,
+	red        : 200,
+	green      : 0,
+	blue       : 0,
+	pos.x      : 0,
+	pos.y      : 0,
+	pos.z      : 0,
+	raduis     : 1,
+	cut_axe    : 3,
+	cut_lvl    : -1,
+	mode       : 4,
+	rot_x      : 0,
+	rot_y      : 0.000000,
+	rot_z      : 0.000000,
+	size       : 0.2,
+	flip_normal     : 0,
+	ambient    : 0.0,
+	diffuse    : 0.0,
+	specular   : 0.0,
+	reflection : 0.0,
+	refraction : 0.0000,
+}
+
+
+]

@@ -1,17 +1,4 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   cube.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/04/22 16:12:57 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:20:47 by nmuller          ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "shape.h"
-
 static int	getval(float *ori1, float *ori2, float size, float r_ori)
 {
 	*ori1 = r_ori;
@@ -27,7 +14,7 @@ static int	init(t_object *tmp_object, t_object *object, t_ray *tmp_ray,
 	return (0);
 }
 
-int			cube_hit(t_object *object, const t_ray *r, t_hit_rec *rec,
+int			cube_neg_hit(t_object *object, const t_ray *r, t_hit_rec *rec,
 													float closest)
 {
 	t_object		t_obj;

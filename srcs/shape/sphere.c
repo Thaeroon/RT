@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:23:28 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:32:16 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/25 11:46:10 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,43 +43,20 @@ int			sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	float		c;
 	float		tmp;
 
-	a = scal_prod(&ray->dir, &ray->dir);
-	b = scal_prod(&ray->ori, &ray->dir);
-	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
+	a = dot(&ray->dir, &ray->dir);
+	b = dot(&ray->ori, &ray->dir);
+	c = dot(&ray->ori, &ray->ori) - (object->radius * object->radius);
 	tmp = b * b - a * c;
 	if (tmp > 0)
 	{
 		tmp = (-b - sqrt(b * b - a * c)) / a;
-		if (0.001 < tmp && tmp < closest)
+		if (MIN_CLOSEST < tmp && tmp < closest)
 			return (get_values(object, ray, rec, tmp));
 		tmp = (-b + sqrt(b * b - a * c)) / a;
-		if (0.001 < tmp && tmp < closest)
+		if (MIN_CLOSEST < tmp && tmp < closest)
 			return (get_values(object, ray, rec, tmp));
 	}
 	return (0);
 }
 
-int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
-																float closest)
-{
-	float		a;
-	float		b;
-	float		c;
-	float		temp1;
-	float		temp0;
 
-	a = scal_prod(&ray->dir, &ray->dir);
-	b = scal_prod(&ray->ori, &ray->dir);
-	c = scal_prod(&ray->ori, &ray->ori) - (object->radius * object->radius);
-	if (b * b - a * c < 0)
-		return (0);
-	temp0 = (-b + sqrtf(b * b - a * c)) / a;
-	temp1 = (-b - sqrtf(b * b - a * c)) / a;
-	if (temp0 > temp1)
-	{
-		a = temp0;
-		temp0 = temp1;
-		temp1 = a;
-	}
-	return (decoupage(object, *ray, rec, closest, temp0, temp1, 'y'));
-}

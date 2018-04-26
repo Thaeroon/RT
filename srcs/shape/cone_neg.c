@@ -1,7 +1,6 @@
 
 #include "shape.h"
-
-int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+int			cone_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest)
 {
 	float	a;
@@ -24,7 +23,7 @@ int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		temp0 = temp1;
 		temp1 = a;
 	}
-	if (temp0 < MIN_CLOSEST)
+	if (temp0 < 0)
 	{
 		a = temp0;
 		temp0 = temp1;
@@ -43,3 +42,4 @@ int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	return (0);
 	(void)object;
 }
+
