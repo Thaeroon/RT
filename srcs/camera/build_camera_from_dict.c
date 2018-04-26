@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:08:23 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 23:32:03 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 15:42:07 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static void			suite(t_camera *camera, t_dict *dict)
 	ret_val = dict_get_with_default(dict, "save_as_ppm", "0");
 	camera->save_as_ppm = twl_atoi(ret_val);
 	ret_val = dict_get_with_default(dict, "sky_background", "1");
-	camera->sky_background = twl_atof(ret_val);
+	camera->sky_background = twl_atoi(ret_val);
 	ret_val = dict_get_with_default(dict, "min_illumination", "0");
 	camera->min_illumination = twl_atof(ret_val);
 }

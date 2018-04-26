@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:37:31 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 23:36:48 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 15:19:23 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@
 # define WIN_WIDTH 900
 # define WIN_HEIGH 450
 # define AA_STRENGH 50
-# define RAY_DEPTH 100
+# define RAY_DEPTH 10
 # define MIN_EMITED 0
 # define NUMBER_OF_THREADS 10
 # define LOADING_STEP 27
