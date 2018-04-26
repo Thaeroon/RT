@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:55:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 16:26:56 by afertah          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:13:50 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,12 +44,21 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
 int			plan_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest);
-int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			cone_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			cube_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
-int			capsule_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			cone_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			cube_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			capsule_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
 void		swap_temp(float *temp0, float *temp1, t_object *object);
+int			hit_obj(t_ray r, t_object *object, t_var v, t_hit_rec *rec);
+
 #endif

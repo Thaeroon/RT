@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:44:02 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 12:01:18 by afertah          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:12:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 # include "utils.h"
 
 # define V1 "camera,light,plane,sphere,cylindre,tube,plan,"
-# define VALIDE_TYPE V1"x_rectangle,y_rectangle,z_rectangle,cube,cone,cone_coup,cone_neg,cube_neg,cylindre_neg,sphere_neg,sphere_coup,capsule"
+# define V2 "x_rectangle,y_rectangle,z_rectangle,cube,cone,cone_coup,"
+# define VALIDE_TYPE V1"cone_neg,cube_neg,cylindre_neg,sphere_neg,sphere_coup"
 
 typedef struct	s_env
 {
