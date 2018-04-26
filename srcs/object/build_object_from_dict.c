@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:12 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 19:18:36 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:22:20 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,11 @@ static void			suite2(t_object *object, t_dict *dict)
 	char	*ret_val;
 
 	ret_val = dict_get_with_default(dict, "texture_stretch_x", "1");
-	object->texture.stretch_x = (twl_atof(ret_val) == 0) ? 1 : twl_atof(ret_val);
+	object->texture.stretch_x = (twl_atof(ret_val) == 0) ? 1 :
+															twl_atof(ret_val);
 	ret_val = dict_get_with_default(dict, "texture_stretch_y", "1");
-	object->texture.stretch_y = (twl_atof(ret_val) == 0) ? 1 : twl_atof(ret_val);
+	object->texture.stretch_y = (twl_atof(ret_val) == 0) ? 1 :
+															twl_atof(ret_val);
 	ret_val = dict_get_with_default(dict, "flip_normal", "0");
 	object->flip_normal = twl_atof(ret_val);
 	ret_val = dict_get_with_default(dict, "cut_lvl", "0");
