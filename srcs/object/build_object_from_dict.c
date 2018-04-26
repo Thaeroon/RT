@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:12 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 13:12:25 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 14:52:13 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,13 +56,13 @@ static void			suite2(t_object *object, t_dict *dict)
 	ret_val = dict_get_with_default(dict, "cut_axe", "0");
 	object->cut_axe = *ret_val;
 	ret_val = dict_get_with_default(dict, "pos_x_coup", "0");
-	object->cut_axe = *ret_val;
+	object->pos_x_coup = *ret_val;
 	ret_val = dict_get_with_default(dict, "pos_y_coup", "0");
-	object->cut_axe = *ret_val;
+	object->pos_y_coup = *ret_val;
 	ret_val = dict_get_with_default(dict, "pos_z_coup", "0");
-	object->cut_axe = *ret_val;
+	object->pos_z_coup = *ret_val;
 	ret_val = dict_get_with_default(dict, "size_coup", "0");
-	object->cut_axe = *ret_val;
+	object->size_coup = *ret_val;
 }
 
 void				build_object_from_dict(t_object *object, t_dict *dict)
