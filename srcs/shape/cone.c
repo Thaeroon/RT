@@ -48,7 +48,7 @@ int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	var.t0 = (-b - sqrtf(b * b - 4 * a * c)) / (2 * a);
 	var.t1 = (-b + sqrtf(b * b - 4 * a * c)) / (2 * a);
 	swap_temp(&var.t0, &var.t1, object);
-	if(var.t0 < closest && var.t0 > MIN_CLOSEST)
+	if (var.t0 < closest && var.t0 > MIN_CLOSEST)
 	{
 		rec->t = var.t0;
 		point_at(ray, var.t0, &rec->p);
