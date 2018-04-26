@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:55:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:33:02 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:09:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int			tube_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
 int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
-int			decoupage(t_object *object, t_ray r, t_hit_rec *rec, t_var var);
+int			cut(t_object *object, t_ray r, t_hit_rec *rec, t_var var);
 int			rotation_x(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
 int			rotation_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
