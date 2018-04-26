@@ -1,9 +1,9 @@
 [
 	{
 		type  : camera,
-		pos.x : -10,
-		pos.y : -10,
-		pos.z : -10,
+		pos.x : 10,
+		pos.y : 10,
+		pos.z : 10,
 		dir_x : 1,
 		dir_y : 1,
 		dir_z : 1,
