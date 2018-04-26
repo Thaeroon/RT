@@ -51,4 +51,5 @@ int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float c
 int			cube_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
 int			cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
 int			capsule_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest);
+void		swap_temp(float *temp0, float *temp1, t_object *object);
 #endif

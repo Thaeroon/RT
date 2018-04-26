@@ -150,7 +150,7 @@ int		decoupage(t_object *object, t_ray r, t_hit_rec *rec, t_var var)
 		{
 			if (var.t1 <= 0)
 				return (0);
-			if (var.t0 < var.closest && var.t1 > 0.001)
+			if (var.t0 < var.closest && var.t1 > MIN_CLOSEST)
 			{
 				rec->t = var.t0;
 				point_at(&r, var.t0, &rec->p);

@@ -13,12 +13,6 @@
 #include "object.h"
 #include "twl_stdio.h"
 
-void				object_print_2(t_object *object)
-{
-	twl_printf("flip_normal: %d\n", object->flip_normal);
-	twl_printf("cut_lvl: %f\ncut_axe: %c\n", object->cut_lvl, object->cut_axe);
-}
-
 void				object_print(t_object *object)
 {
 	twl_printf("===== Print Object =====\n");
@@ -44,5 +38,6 @@ void				object_print(t_object *object)
 	twl_printf("texture_offset_y: %f\n", object->texture.offset_y);
 	twl_printf("texture_stretch_x: %f\n", object->texture.stretch_x);
 	twl_printf("texture_stretch_y: %f\n", object->texture.stretch_y);
-	object_print_2(object);
+	twl_printf("flip_normal: %d\n", object->flip_normal);
+	twl_printf("cut_lvl: %f\ncut_axe: %c\n", object->cut_lvl, object->cut_axe);
 }
