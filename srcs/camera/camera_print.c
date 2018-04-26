@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:08:47 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 23:34:35 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:42:51 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,5 @@ void				camera_print(t_camera *camera)
 	twl_printf("up_z : %f\n", camera->up_z);
 	twl_printf("save_as_ppm : %i\n", camera->save_as_ppm);
 	twl_printf("sky_background : %i\n", camera->sky_background);
-	twl_printf("min_illumination : %i\n", camera->min_illumination);
+	twl_printf("min_illumination : %f\n", camera->min_illumination);
 }
