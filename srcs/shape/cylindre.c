@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cylindre.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 17:15:19 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:15:21 by pbeller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:09:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int		cylindre_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		var.t0 = var.t1;
 		var.t1 = a;
 	}
-	return (decoupage(object, r, rec, var));
+	return (cut(object, r, rec, var));
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cone_coup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 17:14:23 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:14:26 by pbeller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:09:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,5 +54,5 @@ int		cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	rec->normal = normalise(rec->normal);
 	if (dot(&rec->normal, &ray->dir) > 0)
 		rec->normal = mult_vect_float(rec->normal, -1);
-	return (decoupage(object, r, rec, var));
+	return (cut(object, r, rec, var));
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   decoupage.c                                        :+:      :+:    :+:   */
+/*   cut.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -62,7 +62,7 @@ void	verif(t_ray r, t_object *object, t_var *var)
 	}
 }
 
-int		decoupage(t_object *object, t_ray r, t_hit_rec *rec, t_var var)
+int		cut(t_object *object, t_ray r, t_hit_rec *rec, t_var var)
 {
 	verif(r, object, &var);
 	if (verif_neg(object, r, rec, var.closest) == 0)

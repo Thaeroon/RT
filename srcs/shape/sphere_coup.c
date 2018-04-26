@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sphere_coup.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 15:51:16 by pbeller           #+#    #+#             */
-/*   Updated: 2018/04/26 15:51:22 by pbeller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:09:52 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,5 +37,5 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	rec->normal.x = (rec->p.x) / object->radius;
 	rec->normal.y = (rec->p.y) / object->radius;
 	rec->normal.z = (rec->p.z) / object->radius;
-	return (decoupage(object, *ray, rec, var));
+	return (cut(object, *ray, rec, var));
 }
