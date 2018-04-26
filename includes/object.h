@@ -55,6 +55,10 @@ typedef struct		s_object
 	int				flip_normal;
 	float			cut_lvl;
 	char			cut_axe;
+	float			pos_x_coup;
+	float			pos_y_coup;
+	float			pos_z_coup;
+	float			size_coup;
 }					t_object;
 
 t_object			*object_new();
