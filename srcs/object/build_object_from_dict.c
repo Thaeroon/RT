@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:12 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 19:22:20 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 20:06:45 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,12 +57,6 @@ static void			suite2(t_object *object, t_dict *dict)
 	object->cut_lvl = twl_atof(ret_val);
 	ret_val = dict_get_with_default(dict, "cut_axe", "0");
 	object->cut_axe = *ret_val;
-	ret_val = dict_get_with_default(dict, "pos_x_coup", "0");
-	object->pos_x_coup = *ret_val;
-	ret_val = dict_get_with_default(dict, "pos_y_coup", "0");
-	object->pos_y_coup = *ret_val;
-	ret_val = dict_get_with_default(dict, "pos_z_coup", "0");
-	object->pos_z_coup = *ret_val;
 	ret_val = dict_get_with_default(dict, "size_coup", "0");
 	object->size_coup = *ret_val;
 }

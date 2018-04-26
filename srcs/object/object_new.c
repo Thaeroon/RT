@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 20:22:14 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/22 13:06:22 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 20:06:38 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,6 @@ static void			suite(t_object *object)
 	object->cut_lvl = 0;
 	object->cut_axe = 0;
 	object->flip_normal = 0;
-	object->pos_x_coup = 0;
-	object->pos_y_coup = 0;
-	object->pos_z_coup = 0;
 	object->size_coup = 0;
 }
 
