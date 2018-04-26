@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 19:08:02 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/19 19:10:21 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 12:54:40 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,12 @@ static t_vector	get_xpm_texture(const t_hit_rec *rec, t_vector ret)
 static t_vector	get_checker_texture(const t_hit_rec *rec, t_vector ret)
 {
 	float		sines;
+	t_vector	p;
 
-	sines = sin(10 * rec->p.x) * sin(10 * rec->p.y) * sin(10 * rec->p.z);
+	p.x = fabs(rec->p.x);
+	p.y = fabs(rec->p.y);
+	p.z = fabs(rec->p.z);
+	sines = sin(10 * p.x) * sin(10 * p.y) * sin(10 * p.z);
 	if (sines > 0)
 	{
 		ret.x = rec->obj_ptr->red * ret.x;
