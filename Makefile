@@ -1,109 +1,145 @@
-include config.mk
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2016/11/07 16:48:28 by nmuller           #+#    #+#              #
+#    Updated: 2018/04/26 23:32:54 by pbeller          ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-NAME = $(CONFIG_NAME)
-OUTPUT_TYPE = $(CONFIG_OUTPUT_TYPE)
-CC_FLAGS_EXTRA = $(CONFIG_CC_FLAGS_EXTRA)
-CC_FLAGS_EXTRA_POST = $(CONFIG_CC_FLAGS_EXTRA_POST)
 
-LIB_TOWEL_PATH = ./libs/libtowel
-LIB_TOWEL_INCLUDES = -I $(LIB_TOWEL_PATH)/includes
-LIB_TOWEL_LD = $(LIB_TOWEL_PATH)/libtowel.a
+##############
+# PARAMETERS #
+##############
 
-C_DIR = srcs
-O_DIR = .tmp/objects
+# directories
+LIB_PATH = libs
+SRC_PATH = srcs
+OBJ_PATH = obj
 
-CC_FLAGS = -g -Wall -Wextra -Werror
-CC_HEADERS = -I ./includes -I ./srcs/libft/includes
-CC_DEBUG =
 
-C_FILES = $(shell find $(C_DIR) -type f -follow -print | grep ".*\.c$$" | grep -v "\.spec\.c")
-C_DIRS = $(shell find $(C_DIR) -type d -follow -print)
+# compiler flags
+CC = clang
+CFLAGS = -Werror -Wall -Wextra -Iinc
+LFLAGS = -I $(LIB_PATH)/libtowel/includes -I $(LIB_PATH)/minilibx_macos -I includes
 
-H_FILES = $(shell find includes -type f -follow -print | grep ".*\.h$$")
-O_DIRS = $(C_DIRS:$(C_DIR)%=$(O_DIR)%)
-O_FILES = $(C_FILES:$(C_DIR)%.c=$(O_DIR)%.o)
+# linker flags
+LKFLAGS =  -L$(LIB_PATH)/minilibx_macos -lmlx -framework OpenGL -framework AppKit \
+			-L$(LIB_PATH)/libtowel -ltowel -lm -lpthread
 
-COL_GRAY = \033[1;30m
-COL_RESET = \033[0;0m
-COL_RED = \033[0;31m
-COL_GREEN = \033[0;32m
-CC_OPTIONS = $(CC_FLAGS) $(CC_HEADERS) $(CC_FLAGS_EXTRA)
+# libs
+LIB = $(LIB_PATH)/libtowel/libtowel.a $(LIB_PATH)/minilibx_macos/libmlx.a
 
-DEBUG_FILE_NAME = .debug.out
+# files
+SRC_FILES =	camera/build_camera_from_dict.c\
+			camera/camera_del.c\
+			camera/camera_new.c\
+			camera/camera_print.c\
+			camera/init_camera.c\
+			env/env_del.c\
+			env/env_fill.c\
+			env/env_fill2.c\
+			env/env_new.c\
+			env/env_print.c\
+			light/add_light_to_list_from_dict.c\
+			light/build_light_from_dict.c\
+			light/light_del.c\
+			light/light_new.c\
+			light/light_print.c\
+			light/lights_del.c\
+			light/lights_print.c\
+			main.c\
+			object/add_object_to_list_from_dict.c\
+			object/build_object_from_dict.c\
+			object/object_del.c\
+			object/object_new.c\
+			object/object_print.c\
+			object/objects_del.c\
+			object/objects_print.c\
+			render/image.c\
+			render/recursion.c\
+			render/render.c\
+			render/rotate_cam.c\
+			render/save.c\
+			render/texture.c\
+			render/thread.c\
+			render/translate_cam.c\
+			scatter/scatter.c\
+			scatter/scatter_dielectric.c\
+			scatter/scatter_lamberian.c\
+			scatter/scatter_metal.c\
+			shape/cone.c\
+			shape/cone_coup.c\
+			shape/cone_neg.c\
+			shape/cube.c\
+			shape/cube_neg.c\
+			shape/cylindre.c\
+			shape/cylindre_neg.c\
+			shape/object_hit.c\
+			shape/plan.c\
+			shape/rectangle.c\
+			shape/sphere.c\
+			shape/sphere_coup.c\
+			shape/sphere_neg.c\
+			shape/tube.c\
+			transformation/cut.c\
+			transformation/cut2.c\
+			transformation/rotation.c\
+			transformation/translation.c\
+			utils/dict_get_with_default.c\
+			utils/read_raw_input.c\
+			vector/vector_operations.c\
+			vector/vector_transfo.c\
+			xopt/xopt_check_valid_opts.c\
+			xopt/xopt_del.c\
+			xopt/xopt_init.c\
+			xopt/xopt_new.c\
+			xopt/xopt_singleton.c
 
-MAKE_PATHS = $(dir $(wildcard ./libs/*/))
-MAKE = make -s
 
-all:
-	@$(foreach lib, $(MAKE_PATHS), $(MAKE) -C $(lib);)
-	@$(MAKE) $(NAME)
+# executable name
+NAME = RT
 
-$(NAME): $(O_FILES)
-	@echo ""
-	@echo "[info] compile $(OUTPUT_TYPE) ..."
+##############
+# PROCESSING #
+##############
 
-ifeq ($(OUTPUT_TYPE), lib)
-	@ar rcs $@ $^
-endif
-ifeq ($(OUTPUT_TYPE), exec)
-	gcc $(CC_OPTIONS) $(CONFIG_EXTRA_LIBS) $(CONFIG_EXTRA_H) $(LIB_TOWEL_INCLUDES) $(CC_DEBUG) $^ -o $@  $(CC_FLAGS_EXTRA_POST) $(LIB_TOWEL_LD)
-endif
-ifeq ($(OUTPUT_TYPE), so)
-	@gcc $(CC_OPTIONS) $(LIB_TOWEL_INCLUDES) $(CC_DEBUG) $^ -shared -o $@  $(CC_FLAGS_EXTRA_POST) $(LIB_TOWEL_LD)
-endif
-	@echo "$(COL_GREEN)$(NAME)$(COL_RESET)"
-	$(POST_COMPILATION_CMD)
+# variables
+OBJ_FILES = $(SRC_FILES:.c=.o)
+SRC = $(addprefix $(SRC_PATH)/,$(SRC_FILES))
+OBJ = $(addprefix $(OBJ_PATH)/,$(OBJ_FILES))
 
-$(O_DIR)%.o: $(C_DIR)%.c $(H_FILES)
-	@mkdir -p $(O_DIRS) $(O_DIR)
-	@gcc $(CC_OPTIONS) $(CONFIG_EXTRA_H) $(LIB_TOWEL_INCLUDES) $(CC_DEBUG) -o $@ -c $< \
-		&& printf "."
+# rules
+.PHONY: clean fclean re norme lib fcleanall
+all: lib $(NAME)
 
-clean: _clean
-	@$(foreach lib, $(MAKE_PATHS), $(MAKE) -C $(lib) clean;)
+$(NAME): $(OBJ) $(LIB)
+	$(CC) $(OBJ) -o $(NAME) $(LKFLAGS)
 
-fclean: _fclean
-	@$(foreach lib, $(MAKE_PATHS), $(MAKE) -C $(lib) fclean;)
+lib:
+	@make -C $(LIB_PATH)/libtowel
+	@make -C $(LIB_PATH)/minilibx_macos
 
-_clean:
-	$(info [info] $@ ...)
-	@rm -rf .tmp
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c
+	@mkdir -p $(dir $@) 2> /dev/null || true
+	$(CC) $(CFLAGS) $(LFLAGS) -o $@ -c $<
 
-_fclean: _clean
-	$(info [info] $@ ...)
-	@rm $(NAME) 2> /dev/null || echo "" > /dev/null
+clean:
+	@rm -fv $(OBJ)
+	@rmdir -v $(OBJ_PATH) 2> /dev/null || true
 
-re:
-	@$(MAKE) fclean
-	@$(MAKE) all
+fclean: clean
+	@rm -fv $(NAME)
 
-check:
-	$(CONFIG_CHECK_CMD)
+fcleanall: fclean
+	@make fclean -C $(LIB_PATH)/libtowel
+	@make clean -C $(LIB_PATH)/minilibx_macos
 
-check_ongoing:
-	$(CONFIG_CHECK_ONGOING_CMD)
+re: fclean all
 
-norm:
-	find srcs includes -name "*.h" -o -name "*.c" -follow | xargs norminette
-
-valgrind:
-	valgrind --leak-check=full ./$(NAME) $(args)
-
-log:
-	touch $(DEBUG_FILE_NAME)
-	tail -f $(DEBUG_FILE_NAME)
-
-rendu:
-	rm -rf /tmp/$(NAME)_rendu
-	sh "$(shell git rev-parse --show-toplevel)/common/tools/prepare_rendu.sh" `pwd` /tmp/$(NAME)_rendu $(vogo)
-
-run: all
-	$(CONFIG_RUN_CMD)
-
-obj:
-	sh "$(shell git rev-parse --show-toplevel)/common/tools/c_obj_generator/create_object.sh" $(obj) `pwd`
-
-mgr:
-	sh "$(shell git rev-parse --show-toplevel)/common/tools/c_obj_generator/create_object_mgr.sh" $(obj) `pwd`
-
-.PHONY: init_libs all clean fclean re
+norme:
+	norminette $(SRC)
+	norminette $(INC_PATH)*.h
