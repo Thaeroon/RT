@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:44:02 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:12:52 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:29:54 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,9 @@
 # include "twl_lst.h"
 # include "utils.h"
 
-# define V1 "camera,light,plane,sphere,cylindre,tube,plan,"
-<<<<<<< HEAD
+# define V1 "camera,light,sphere,cylindre,tube,plan,plan_coup,sphere_coup,"
 # define V2 "x_rectangle,y_rectangle,z_rectangle,cube,cone,cone_coup,"
-# define VALIDE_TYPE V1"cone_neg,cube_neg,cylindre_neg,sphere_neg,sphere_coup"
-=======
-# define V2 "x_rectangle,y_rectangle,z_rectanglecube,cone,cone_coup,cone_neg"
-# define VALIDE_TYPE V1V2"cube_neg,cylindre_neg,sphere_neg,sphere_coup"
->>>>>>> pbeller
+# define VALIDE_TYPE V1 V2
 
 typedef struct	s_env
 {

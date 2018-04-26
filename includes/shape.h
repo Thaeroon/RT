@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:55:13 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:13:50 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 17:33:02 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,8 @@ int			translate(t_object *object, const t_ray *ray, t_hit_rec *rec,
 int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 										float closest);
 int			plan_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest);
+int			plan_y_coup(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest);
 int			cone_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest);
