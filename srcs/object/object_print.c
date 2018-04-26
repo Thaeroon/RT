@@ -17,7 +17,6 @@ void				object_print_2(t_object *object)
 {
 	twl_printf("flip_normal: %d\n", object->flip_normal);
 	twl_printf("cut_lvl: %f\ncut_axe: %c\n", object->cut_lvl, object->cut_axe);
-
 }
 
 void				object_print(t_object *object)

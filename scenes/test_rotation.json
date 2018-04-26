@@ -1,9 +1,9 @@
 [
 	{
 		type  : camera,
-		pos.x : 10,
-		pos.y : 10,
-		pos.z : 10,
+		pos.x : -10,
+		pos.y : -10,
+		pos.z : -10,
 		dir_x : 1,
 		dir_y : 1,
 		dir_z : 1,
@@ -135,7 +135,7 @@
 		refraction : 0,
 	},
 	{
-		type       : cone,
+		type       : cube,
 		red        : 255,
 		green      : 255,
 		blue       : 255,
@@ -143,7 +143,7 @@
 		pos.y      : 1,
 		pos.z      : 1,
 		rot_x      : 0,
-		rot_y      : 90,
+		rot_y      : 0,
 		rot_z      : 0,
 		size       : 1,
 		radius     : 1,

@@ -1,9 +1,9 @@
 [
 	{
 		type  : camera,
-		pos.x : 0,
-		pos.y : 0,
-		pos.z : 10,
+		pos.x : -10,
+		pos.y : -10,
+		pos.z : -10,
 		dir_x : 0,
 		dir_y : 0,
 		dir_z : 0,
@@ -25,8 +25,8 @@
 	{
 		type       : cube,
 		red        : 255,
-		green      : 0,
-		blue       : 0,
+		green      : 255,
+		blue       : 255,
 		pos.x      : 0,
 		pos.y      : 0,
 		pos.z      : 0,
@@ -38,7 +38,7 @@
 		ambient    : 0.0,
 		diffuse    : 0.0,
 		specular   : 0.0,
-		reflection : 0.0,
+		reflection : 1.0,
 		refraction : 0.0000,
 	},
 	{

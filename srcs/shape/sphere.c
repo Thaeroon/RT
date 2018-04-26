@@ -58,5 +58,3 @@ int			sphere_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	}
 	return (0);
 }
-
-
