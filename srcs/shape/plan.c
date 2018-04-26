@@ -37,5 +37,5 @@ int		plan_y(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	point_at(ray, var.t0, &rec->p);
 	rec->normal = (object->flip_normal > 0) ? new_vector(0, -1, 0)
 														: new_vector(0, 1, 0);
-	return (decoupage(object,*ray,rec,var));
+	return (decoupage(object, *ray, rec, var));
 }

@@ -45,11 +45,11 @@ int			object_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 		return (plan_y(object, ray, rec, closest));
 	if (twl_strcmp(object->type, "cone") == 0)
 		return (cone_hit(object, ray, rec, closest));
-	if(twl_strcmp(object->type, "cone_coup") == 0)
+	if (twl_strcmp(object->type, "cone_coup") == 0)
 		return (cone_coup_hit(object, ray, rec, closest));
-	return(0);
 	if (twl_strcmp(object->type, "capsule") == 0)
 		return (capsule_hit(object, ray, rec, closest));
+	return (0);
 }
 
 int			hit(t_env *env, const t_ray *ray, t_hit_rec *rec)

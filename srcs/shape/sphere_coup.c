@@ -1,5 +1,6 @@
 
 #include "shape.h"
+
 int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 																float closest)
 {
@@ -14,8 +15,8 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	if (b * b - a * c < 0)
 		return (0);
 	var.closest = closest;
-	var.t0  = (-b + sqrtf(b*b - a*c)) / a;
-	var.t1 = (-b - sqrtf(b*b - a*c)) / a;
+	var.t0 = (-b + sqrtf(b * b - a * c)) / a;
+	var.t1 = (-b - sqrtf(b * b - a *c )) / a;
 	if (var.t1 > var.t0)
 	{
 		a = var.t0;
@@ -27,4 +28,3 @@ int			sphere_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	rec->normal.z = (rec->p.z) / object->radius;
 	return (decoupage(object, *ray, rec, var));
 }
-

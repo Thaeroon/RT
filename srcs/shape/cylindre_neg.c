@@ -1,4 +1,6 @@
+
 #include "shape.h"
+
 void			ft_swap_tmp(float *temp1, float *temp2)
 {
 	float		temp;
@@ -8,7 +10,7 @@ void			ft_swap_tmp(float *temp1, float *temp2)
 	*temp2 = temp;
 }
 
-static void	get_tube_u_v(const t_vector *p, float *u, float *v)
+static void		get_tube_u_v(const t_vector *p, float *u, float *v)
 {
 	float	phi;
 	float	theta;
@@ -19,8 +21,8 @@ static void	get_tube_u_v(const t_vector *p, float *u, float *v)
 	*v = (theta + M_PI / 2) / (M_PI);
 }
 
-int				cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
-															float closest)
+int				cylindre_neg_hit(t_object *object, const t_ray *ray,
+												t_hit_rec *rec, float closest)
 {
 	float		a;
 	float		b;
@@ -31,8 +33,7 @@ int				cylindre_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	b = (ray->ori.x * ray->dir.x + ray->ori.z * ray->dir.z);
 	c = (ray->ori.x * ray->ori.x + ray->ori.z * ray->ori.z) -
-									object->size * object->size;
-									
+									object->size * object->size;						
 	temp0 = (-b + sqrtf(b * b - a * c)) / (a);
 	temp1 = (-b - sqrtf(b * b - a * c)) / (a);
 	(temp0 > temp1) ? ft_swap_tmp(&temp0, &temp1) : 0;

@@ -12,7 +12,7 @@
 
 #include "shape.h"
 
-static void			ft_swap_tmp(float *temp1, float *temp2)
+static void		ft_swap_tmp(float *temp1, float *temp2)
 {
 	float		temp;
 
@@ -21,7 +21,7 @@ static void			ft_swap_tmp(float *temp1, float *temp2)
 	*temp2 = temp;
 }
 
-static void	get_tube_u_v(const t_vector *p, float *u, float *v)
+static void		get_tube_u_v(const t_vector *p, float *u, float *v)
 {
 	float	phi;
 	float	theta;

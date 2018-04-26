@@ -1,4 +1,6 @@
+
 #include "shape.h"
+
 static void	get_sphere_u_v(const t_vector *p, float *u, float *v)
 {
 	float	phi;
@@ -45,5 +47,3 @@ int			sphere_neg_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
 	}
 	return (0);
 }
-
-
