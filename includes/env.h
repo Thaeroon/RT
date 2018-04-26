@@ -6,7 +6,7 @@
 /*   By: nmuller <nmuller@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/19 18:44:02 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 17:41:24 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 19:40:48 by nmuller          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 # include "twl_lst.h"
 # include "utils.h"
 
-# define V1 "camera,light,sphere,cylindre,tube,plan,plan_coup,sphere_coup,"
+# define V1 "camera,sphere,cylindre,tube,plan,plan_coup,sphere_coup,"
 # define V2 "x_rectangle,y_rectangle,z_rectangle,cube,cone,cone_coup,"
 # define VALIDE_TYPE V1 V2
 
