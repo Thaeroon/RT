@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cylindre_neg.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 17:15:38 by pbeller           #+#    #+#             */
+/*   Updated: 2018/04/26 17:15:42 by pbeller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "shape.h"
 
@@ -33,7 +44,7 @@ int				cylindre_neg_hit(t_object *object, const t_ray *ray,
 	a = ray->dir.x * ray->dir.x + ray->dir.z * ray->dir.z;
 	b = (ray->ori.x * ray->dir.x + ray->ori.z * ray->dir.z);
 	c = (ray->ori.x * ray->ori.x + ray->ori.z * ray->ori.z) -
-									object->size * object->size;						
+									object->size * object->size;
 	temp0 = (-b + sqrtf(b * b - a * c)) / (a);
 	temp1 = (-b - sqrtf(b * b - a * c)) / (a);
 	(temp0 > temp1) ? ft_swap_tmp(&temp0, &temp1) : 0;
@@ -49,4 +60,3 @@ int				cylindre_neg_hit(t_object *object, const t_ray *ray,
 	}
 	return (0);
 }
-

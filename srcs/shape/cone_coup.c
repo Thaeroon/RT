@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   cone_coup.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: pbeller <marvin@42.fr>                     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/04/26 17:14:23 by pbeller           #+#    #+#             */
+/*   Updated: 2018/04/26 17:14:26 by pbeller          ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "shape.h"
 
 void	swap_var(t_var *var)
@@ -18,7 +30,8 @@ void	swap_var(t_var *var)
 	}
 }
 
-int		cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
+int		cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec,
+																float closest)
 {
 	float	a;
 	float	b;

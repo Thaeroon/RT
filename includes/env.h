@@ -20,7 +20,8 @@
 # include "utils.h"
 
 # define V1 "camera,light,plane,sphere,cylindre,tube,plan,"
-# define VALIDE_TYPE V1"x_rectangle,y_rectangle,z_rectangle,cube,cone,cone_coup,cone_neg,cube_neg,cylindre_neg,sphere_neg,sphere_coup,capsule"
+# define V2 "x_rectangle,y_rectangle,z_rectanglecube,cone,cone_coup,cone_neg"
+# define VALIDE_TYPE V1V2"cube_neg,cylindre_neg,sphere_neg,sphere_coup"
 
 typedef struct	s_env
 {
