@@ -6,7 +6,7 @@
 /*   By: nmuller <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/04/26 19:21:46 by nmuller           #+#    #+#             */
-/*   Updated: 2018/04/26 19:21:50 by nmuller          ###   ########.fr       */
+/*   Updated: 2018/04/26 22:59:13 by afertah          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,17 @@ int		cut(t_object *object, t_ray r, t_hit_rec *rec, t_var var)
 	if ((twl_strcmp(object->type, "cone_coup") == 0) && (object->cut_axe
 			== 'x' || object->cut_axe == 'y' || object->cut_axe == 'z'))
 	{
-		if ((var.axe0 >= -object->radius && var.axe0 <= object->cut_lvl) ||
-				(var.axe1 <= object->cut_lvl && var.axe1 >= -object->radius))
+		if ((var.axe0 >= -object->cut_lvl && var.axe0 <= object->cut_lvl) ||
+				(var.axe1 <= object->cut_lvl && var.axe1 >= -object->cut_lvl))
 		{
 			if (var.t1 <= 0)
 				return (0);
 			if (var.t0 < var.closest && var.t1 > MIN_CLOSEST)
 			{
 				rec->t = var.t0;
+				rec->normal.x = rec->p.x / object->radius;
+				rec->normal.y = 1;
+				rec->normal.z = rec->p.z / object->radius;
 				point_at(&r, var.t0, &rec->p);
 				return (1);
 			}
