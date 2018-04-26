@@ -1,22 +1,22 @@
 #include "shape.h"
 
-// void	swap_tmp(t_var *var)
-// {
-// 	float	a;
+void	swap_var(t_var *var)
+{
+	float	a;
 
-// 	if (var->t1 < var->t0)
-// 	{
-// 		a = var->t0;
-// 		var->t0 = var->t1;
-// 		var->t1 = a;
-// 	}
-// 	if (var->t0 < 0)
-// 	{
-// 		a = var->t0;
-// 		var->t0 = var->t1;
-// 		var->t1 = a;
-// 	}
-// }
+	if (var->t1 < var->t0)
+	{
+		a = var->t0;
+		var->t0 = var->t1;
+		var->t1 = a;
+	}
+	if (var->t0 < MIN_CLOSEST)
+	{
+		a = var->t0;
+		var->t0 = var->t1;
+		var->t1 = a;
+	}
+}
 
 int		cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float closest)
 {
@@ -36,19 +36,7 @@ int		cone_coup_hit(t_object *object, const t_ray *ray, t_hit_rec *rec, float clo
 	var.t0 = (-b - sqrtf(b * b - 4 * a * c)) / (2 * a);
 	var.t1 = (-b + sqrtf(b * b - 4 * a * c)) / (2 * a);
 	var.closest = closest;
-	// swap_tmp(&var);
-	if (var.t1 < var.t0)
-	{
-		a = var.t0;
-		var.t0 = var.t1;
-		var.t1 = a;
-	}
-	if (var.t0 < 0)
-	{
-		a = var.t0;
-		var.t0 = var.t1;
-		var.t1 = a;
-	}
+	swap_var(&var);
 	rec->normal = cross(cross(rec->p, new_vector(0, 1, 0)), rec->p);
 	rec->normal = normalise(rec->normal);
 	if (dot(&rec->normal, &ray->dir) > 0)
